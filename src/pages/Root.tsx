@@ -1,13 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from '@/components/Header';
+import { Box } from '@chakra-ui/react';
 
 const Root = () => {
   return (
     <>
       <Header />
-      <main>
+      <Box as="main">
         <Outlet />
-      </main>
+      </Box>
     </>
   );
 };

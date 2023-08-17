@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
 
 export const Header = () => {
   return (
-    <header>
+    <Box as="header">
       <nav>
         <ul>
           <li>
@@ -16,6 +17,6 @@ export const Header = () => {
           </li>
         </ul>
       </nav>
-    </header>
+    </Box>
   );
 };
