@@ -1,11 +1,33 @@
+import { useState, useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Root from './Root';
 import ErrorPage from './ErrorPage';
 import Home from './Home';
 import Products from './Products';
 import Cart from './Cart';
+import { api } from '@/api';
 
 export const Router = () => {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  console.log(products);
+
+  useEffect(() => {
+    let ignore = false;
+
+    const getProducts = async () => {
+      const data = await api.getProducts();
+      if (!ignore) {
+        setProducts(data);
+      }
+    };
+
+    getProducts();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -18,7 +40,7 @@ export const Router = () => {
         },
         {
           path: '/products',
-          element: <Products />,
+          element: <Products products={products} />,
         },
         {
           path: '/cart',
