@@ -6,10 +6,10 @@ import Home from './Home';
 import Products from './Products';
 import Cart from './Cart';
 import { api } from '@/api';
+import { PRODUCTS } from '@/data';
 
 export const Router = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  console.log(products);
+  const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
 
   useEffect(() => {
     let ignore = false;
@@ -21,7 +21,7 @@ export const Router = () => {
       }
     };
 
-    getProducts();
+    // getProducts();
 
     return () => {
       ignore = true;
