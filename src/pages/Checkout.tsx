@@ -23,9 +23,16 @@ import PennyBoard from '@/assets/penny-board.jpg';
 
 const Checkout = () => {
   const secondaryTextColor = 'gray.600';
+  const colSpan = { base: 2, md: 1 };
+
   return (
     <Container maxW={'container.xl'} p={0}>
-      <Flex h={'100vh'} py={20}>
+      <Flex
+        h={{ base: 'auto', md: '100vh' }}
+        py={{ base: 0, sm: 10, md: 20 }}
+        direction={{ base: 'column-reverse', md: 'row' }}
+      >
+        {/* Details */}
         <VStack
           w={'full'}
           h={'full'}
@@ -38,13 +45,13 @@ const Checkout = () => {
             <Text>If you already have an account, click here</Text>
           </VStack>
           <SimpleGrid columns={2} columnGap={3} rowGap={6} w={'full'}>
-            <GridItem colSpan={1}>
+            <GridItem colSpan={colSpan}>
               <FormControl>
                 <FormLabel>First Name</FormLabel>
                 <Input placeholder="Naruto" />
               </FormControl>
             </GridItem>
-            <GridItem colSpan={1}>
+            <GridItem colSpan={colSpan}>
               <FormControl>
                 <FormLabel>Last Name</FormLabel>
                 <Input placeholder="Uzumaki" />
@@ -56,13 +63,13 @@ const Checkout = () => {
                 <Input placeholder="Ramen st. 23" />
               </FormControl>
             </GridItem>
-            <GridItem colSpan={1}>
+            <GridItem colSpan={colSpan}>
               <FormControl>
                 <FormLabel>City</FormLabel>
                 <Input placeholder="Konoha" />
               </FormControl>
             </GridItem>
-            <GridItem colSpan={1}>
+            <GridItem colSpan={colSpan}>
               <FormControl>
                 <FormLabel>Country</FormLabel>
                 <Select>
@@ -82,6 +89,8 @@ const Checkout = () => {
             </GridItem>
           </SimpleGrid>
         </VStack>
+
+        {/* Cart */}
         <VStack
           w={'full'}
           h={'full'}
