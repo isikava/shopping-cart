@@ -67,3 +67,8 @@ export const PRODUCTS: IProduct[] = [
     },
   },
 ];
+
+export const LINKS = [
+  { name: 'Home', to: '/', id: 1 },
+  { name: 'Shop', to: 'products', id: 2 },
+];
