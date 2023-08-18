@@ -4,7 +4,7 @@ import Root from './Root';
 import ErrorPage from './ErrorPage';
 import Home from './Home';
 import Products from './Products';
-import Cart from './Cart';
+import Checkout from './Checkout';
 import { api } from '@/api';
 import { PRODUCTS } from '@/data';
 
@@ -43,8 +43,8 @@ export const Router = () => {
           element: <Products products={products} />,
         },
         {
-          path: '/cart',
-          element: <Cart />,
+          path: '/checkout',
+          element: <Checkout />,
         },
       ],
     },
