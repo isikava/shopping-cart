@@ -7,6 +7,7 @@ import Products from './Products';
 import Checkout from './Checkout';
 import { api } from '@/api';
 import { PRODUCTS } from '@/data';
+import Components from './Components';
 
 export const Router = () => {
   const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
@@ -45,6 +46,10 @@ export const Router = () => {
         {
           path: '/checkout',
           element: <Checkout />,
+        },
+        {
+          path: '/components',
+          element: <Components />,
         },
       ],
     },

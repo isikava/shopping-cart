@@ -31,6 +31,15 @@ const brandRing = {
   },
 };
 
+const brandStyle = {
+  ...brandRing,
+  h: '50px',
+  minW: '150px',
+  fontSize: 'sm',
+  px: 6,
+  py: 4,
+};
+
 const theme = extendTheme(
   {
     colors: {
@@ -46,10 +55,17 @@ const theme = extendTheme(
         '800': '#5B0B0B',
         '900': '#2D0606',
       },
+      main: '#E6F1FA',
+      advanced: '#57A4EB',
+      divider: '#C4C4C4',
+      dark2: '#3F3F3F',
+      gray1: '#828282',
+      lighthover: '#F0F2F2',
+      link: '#0F6DB1',
     },
     fonts: {
-      heading: `Montserrat, ${base.fonts?.heading}`,
-      body: `Inter, ${base.fonts?.body}`,
+      heading: `Oswald, Montserrat, ${base.fonts?.heading}`,
+      body: `Roboto, Inter, ${base.fonts?.body}`,
     },
     components: {
       Input: { ...inputSelectStyles },
@@ -63,19 +79,52 @@ const theme = extendTheme(
         },
       },
       Button: {
+        baseStyle: {
+          rounded: 'none',
+          fontFamily: 'heading',
+          fontWeight: 'medium',
+          textTransform: 'uppercase',
+        },
+        sizes: {},
         variants: {
           primary: {
-            rounded: 'none',
-            ...brandRing,
+            ...brandStyle,
             color: 'white',
-            bg: 'brand.400',
+            bg: 'black',
             _hover: {
-              bg: 'brand.500',
+              bg: 'brand.400',
             },
             _active: {
               bg: 'brand.600',
             },
           },
+          secondary: {
+            ...brandStyle,
+            color: 'dark2',
+            bg: 'white',
+            border: '2px solid',
+            borderColor: 'divider',
+            _hover: {
+              borderColor: 'currentColor',
+            },
+          },
+          sm: {
+            ...brandRing,
+            color: 'gray1',
+            bg: 'lighthover',
+            border: '2px solid',
+            borderColor: 'divider',
+            h: '40px',
+            minW: '114px',
+            _hover: {
+              borderColor: 'currentColor',
+            },
+          },
+        },
+        defaultProps: {
+          size: 'md',
+          variant: 'solid',
+          colorScheme: 'gray',
         },
       },
     },

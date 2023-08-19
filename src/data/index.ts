@@ -72,4 +72,5 @@ export const LINKS = [
   { name: 'Home', to: '/', id: 1 },
   { name: 'Shop', to: 'products', id: 2 },
   { name: 'Checkout', to: 'checkout', id: 3 },
+  { name: 'Comp', to: 'components', id: 4 },
 ];
