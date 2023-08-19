@@ -20,11 +20,11 @@ const theme = extendTheme(
   withDefaultColorScheme({
     colorScheme: 'brand',
     components: ['Checkbox'],
-  }),
-  withDefaultVariant({
-    variant: 'filled',
-    components: ['Input', 'Select'],
   })
+  // withDefaultVariant({
+  //   variant: 'filled',
+  //   components: ['Input', 'Select'],
+  // })
 );
 
 export default theme;

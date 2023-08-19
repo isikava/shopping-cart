@@ -17,11 +17,11 @@ const Components = () => {
         <Heading size={'xl'}>Forms</Heading>
         <FormControl>
           <FormLabel>Idle</FormLabel>
-          <Input />
+          <Input placeholder="Naruto" />
         </FormControl>
         <FormControl>
           <FormLabel>Focused</FormLabel>
-          <Input />
+          <Input placeholder="Naruto" />
         </FormControl>
 
         <Heading size={'xl'}>Buttons</Heading>

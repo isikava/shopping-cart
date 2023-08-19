@@ -1,17 +1,18 @@
 const inputSelectStyles = {
-  variants: {
-    filled: {
-      field: {
-        _focus: {
-          borderColor: 'brand.400',
-        },
-      },
+  baseStyle: {
+    field: {
+      borderRadius: 'none',
+      outline: 0,
     },
   },
-  sizes: {
-    md: {
+  variants: {
+    outline: {
       field: {
-        borderRadius: 'none',
+        border: '1px',
+        borderColor: 'divider',
+        _hover: {
+          borderColor: 'gray1',
+        },
       },
     },
   },
