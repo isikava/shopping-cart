@@ -1,0 +1,21 @@
+export const colors = {
+  brand: {
+    '50': '#FCE8E8',
+    '100': '#F7BFBF',
+    '200': '#F29797',
+    '300': '#ED6E6E',
+    '400': '#E84545',
+    '500': '#E31C1C',
+    '600': '#B61616',
+    '700': '#881111',
+    '800': '#5B0B0B',
+    '900': '#2D0606',
+  },
+  main: '#E6F1FA',
+  advanced: '#57A4EB',
+  divider: '#C4C4C4',
+  dark2: '#3F3F3F',
+  gray1: '#828282',
+  lighthover: '#F0F2F2',
+  link: '#0F6DB1',
+};
