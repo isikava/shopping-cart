@@ -1,17 +1,8 @@
 export const brandRing = {
   _focus: {
     ring: 2,
-    ringColor: 'brand.400',
+    ringColor: 'brand.500',
   },
-};
-
-const brandStyle = {
-  ...brandRing,
-  h: '50px',
-  minW: '150px',
-  fontSize: 'sm',
-  px: 6,
-  py: 4,
 };
 
 const baseStyle = {
@@ -21,20 +12,39 @@ const baseStyle = {
   textTransform: 'uppercase',
 };
 
+const sizes = {
+  sm: {
+    fontSize: 'xs',
+  },
+  md: {
+    fontSize: 'sm',
+  },
+  '-sm': {
+    fontSize: 'xs',
+    h: '40px',
+    px: 4,
+  },
+  '-md': {
+    fontSize: 'sm',
+    h: '50px',
+    px: 8,
+  },
+};
+
 const variants = {
   primary: {
-    ...brandStyle,
+    ...brandRing,
     color: 'white',
     bg: 'black',
     _hover: {
-      bg: 'brand.400',
+      bg: 'brand.500',
     },
     _active: {
-      bg: 'brand.600',
+      bg: 'brand.700',
     },
   },
   secondary: {
-    ...brandStyle,
+    ...brandRing,
     color: 'dark2',
     bg: 'white',
     border: '2px solid',
@@ -43,28 +53,25 @@ const variants = {
       borderColor: 'currentColor',
     },
   },
-  sm: {
+  muted: {
     ...brandRing,
     color: 'gray1',
     bg: 'lighthover',
     border: '2px solid',
     borderColor: 'divider',
-    h: '40px',
-    minW: '114px',
     _hover: {
       borderColor: 'currentColor',
     },
   },
 };
 
-const defaultProps = {
-  size: 'md',
-  variant: 'solid',
-  colorScheme: 'gray',
-};
-
 export const Button = {
   baseStyle,
+  sizes,
   variants,
-  defaultProps,
+  defaultProps: {
+    size: 'md',
+    variant: 'solid',
+    colorScheme: 'gray',
+  },
 };

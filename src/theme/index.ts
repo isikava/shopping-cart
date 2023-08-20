@@ -16,11 +16,11 @@ const theme = extendTheme(
     },
     colors,
     components,
-  },
-  withDefaultColorScheme({
-    colorScheme: 'brand',
-    components: ['Checkbox'],
-  })
+  }
+  // withDefaultColorScheme({
+  //   colorScheme: 'brand',
+  //   components: ['Checkbox'],
+  // })
   // withDefaultVariant({
   //   variant: 'filled',
   //   components: ['Input', 'Select'],

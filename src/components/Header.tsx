@@ -38,6 +38,7 @@ export const Header = () => {
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             variant={'ghost'}
             aria-label="toggle navigation"
+            size="md"
           />
         </Flex>
         {/* Nav */}
@@ -76,8 +77,13 @@ export const Header = () => {
             <NavLink to={'#'} name="Sign&nbsp;Up" />
           </Flex>
           {/* Bag */}
-          <Flex>
-            <IconButton aria-label="cart" icon={<Bag />} variant={'link'} />
+          <Flex align={'center'}>
+            <IconButton
+              aria-label="cart"
+              icon={<Bag />}
+              variant={'link'}
+              size={'lg'}
+            />
             <Text display={{ base: 'none', md: 'block' }} fontWeight={500}>
               0,00&nbsp;EUR
             </Text>
