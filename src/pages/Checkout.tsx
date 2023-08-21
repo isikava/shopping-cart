@@ -83,7 +83,7 @@ const Checkout = () => {
               <Checkbox defaultChecked>Ship to billing address.</Checkbox>
             </GridItem>
             <GridItem colSpan={2}>
-              <Button variant={'primary'} size={'lg'} w={'full'}>
+              <Button variant={'brand'} size={'lg'} w={'full'}>
                 Place Order
               </Button>
             </GridItem>

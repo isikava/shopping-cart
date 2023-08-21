@@ -32,7 +32,7 @@ const sizes = {
 };
 
 const variants = {
-  primary: {
+  brand: {
     ...brandRing,
     color: 'white',
     bg: 'black',
@@ -43,14 +43,14 @@ const variants = {
       bg: 'brand.700',
     },
   },
-  secondary: {
+  second: {
     ...brandRing,
     color: 'dark2',
     bg: 'white',
     border: '2px solid',
     borderColor: 'divider',
     _hover: {
-      borderColor: 'currentColor',
+      borderColor: 'gray1',
     },
   },
   muted: {
