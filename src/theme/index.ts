@@ -5,6 +5,7 @@ import {
   withDefaultVariant,
 } from '@chakra-ui/react';
 
+import { styles } from './styles';
 import { colors } from './colors';
 import { components } from './components';
 
@@ -16,6 +17,7 @@ const theme = extendTheme(
     },
     colors,
     components,
+    styles,
   }
   // withDefaultColorScheme({
   //   colorScheme: 'brand',

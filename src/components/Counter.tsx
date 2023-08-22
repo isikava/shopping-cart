@@ -30,6 +30,7 @@ export const Counter = () => {
           {...stepper}
         />
         <NumberInputField
+          textAlign={'center'}
           borderRadius={0}
           border={'none'}
           w={10}

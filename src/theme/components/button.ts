@@ -22,12 +22,12 @@ const sizes = {
   '-sm': {
     fontSize: 'xs',
     h: '40px',
-    px: 4,
+    px: 6,
   },
   '-md': {
     fontSize: 'sm',
     h: '50px',
-    px: 8,
+    px: 10,
   },
 };
 
@@ -51,6 +51,24 @@ const variants = {
     borderColor: 'divider',
     _hover: {
       borderColor: 'gray1',
+    },
+  },
+  transp: {
+    color: 'black',
+    bg: 'transparent',
+    border: '2px solid',
+    borderColor: 'black',
+    _hover: {
+      boxShadow: 'md',
+    },
+  },
+  transpWhite: {
+    color: 'white',
+    bg: 'transparent',
+    border: '2px solid',
+    borderColor: 'white',
+    _hover: {
+      boxShadow: 'md',
     },
   },
   muted: {

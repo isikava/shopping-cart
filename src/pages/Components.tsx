@@ -80,6 +80,7 @@ const Components = () => {
             <Button variant={'second'} leftIcon={<BiHeart />}>
               My button
             </Button>
+            <Button variant={'transp'}>Transparent</Button>
             <CButton variant={'solid'}>Solid</CButton>
           </VStack>
           <VStack>

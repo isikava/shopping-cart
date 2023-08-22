@@ -1,7 +1,7 @@
 import { Button as CButton, ButtonProps } from '@chakra-ui/react';
 
 type Props = ButtonProps & {
-  variant?: 'brand' | 'second';
+  variant?: 'brand' | 'second' | 'transp';
 };
 
 export const Button = ({ variant = 'brand', children, ...rest }: Props) => {
