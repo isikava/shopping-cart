@@ -10,9 +10,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
-import { LINKS } from '@/data';
 import { ReactComponent as Logo } from '@/assets/logo.svg';
 import { ReactComponent as Bag } from '@/assets/cart-icon.svg';
+import { LINKS } from '@/data';
+import { colors } from '@/theme/colors';
+const { brand } = colors;
 
 export const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -20,13 +22,14 @@ export const Header = () => {
   return (
     <Box
       as="header"
-      py={{ base: 2, md: 4 }}
+      py={{ base: 2, md: 9 }}
       px={{ base: 3, md: 6 }}
-      minH={'60px'}
+      minH={{ base: '60px', lg: '115px' }}
       bg="black"
       color="white"
+      gap={4}
     >
-      <Flex align="center">
+      <Flex align="center" h={'full'}>
         {/* Burger */}
         <Flex
           display={{ base: 'flex', md: 'none' }}
@@ -38,41 +41,48 @@ export const Header = () => {
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             variant={'ghost'}
             aria-label="toggle navigation"
-            size="md"
+            size="lg"
+            color={'white'}
+            _hover={{ color: 'gray.600' }}
           />
         </Flex>
-        {/* Nav */}
+
+        {/* Logo */}
         <Flex
-          flex={{ base: 1 }}
+          flex={1}
           align={'center'}
           justify={{ base: 'center', md: 'start' }}
         >
           <Box as={Link} to="/">
             <Logo />
           </Box>
-          {/* Desktop Nav */}
-          <Stack
-            as={'nav'}
-            display={{ base: 'none', md: 'flex' }}
-            direction={'row'}
-            spacing={4}
-            ml={10}
-          >
-            {LINKS.map((l) => (
-              <NavLink key={l.name} {...l} />
-            ))}
-          </Stack>
         </Flex>
 
-        {/* Authorization */}
+        {/* Desktop Nav */}
         <Stack
-          flex={{ base: 1, md: 0 }}
+          as={'nav'}
+          flex={{ base: 'auto', md: 1 }}
+          display={{ base: 'none', md: 'flex' }}
+          justify={'center'}
+          direction={'row'}
+          spacing={3}
+          px={4}
+        >
+          {LINKS.map((l) => (
+            <NavLink key={l.name} {...l} />
+          ))}
+        </Stack>
+
+        {/* Authorization group */}
+        <Stack
+          role="group"
+          flex={1}
           justify={'flex-end'}
           direction={'row'}
           align={'center'}
-          spacing={[2, 6]}
+          spacing={2}
         >
-          <Flex display={{ base: 'none', md: 'inline-flex' }} gap={4}>
+          <Flex display={{ base: 'none', md: 'inline-flex' }} gap={1}>
             <NavLink to={'#'} name="Sign&nbsp;In" />
             <NavLink to={'#'} name="Sign&nbsp;Up" />
           </Flex>
@@ -93,7 +103,7 @@ export const Header = () => {
 
       {/* Mobile Nav */}
       <Collapse in={isOpen} animateOpacity>
-        <Stack py={4} display={{ md: 'none' }}>
+        <Stack display={{ md: 'none' }} py={4}>
           <VStack as={'nav'} spacing={4}>
             {LINKS.map((l) => (
               <NavLink key={l.id} {...l} />
@@ -113,11 +123,13 @@ const NavLink = ({ name, to }: { name: string; to: string }) => {
       as={Link}
       to={to}
       py={1}
+      px={2}
+      fontFamily={'heading'}
       fontSize={'14px'}
       fontWeight={600}
       textTransform={'uppercase'}
       borderBottom={'2px solid transparent'}
-      _hover={{ borderBottom: '2px solid red' }}
+      _hover={{ borderBottom: `2px solid ${brand[500]}` }}
     >
       {name}
     </Box>

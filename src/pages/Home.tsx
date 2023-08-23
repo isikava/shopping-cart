@@ -143,7 +143,7 @@ const Home = () => {
               />
               <VStack flex={1} align={'flex-start'} spacing={0} py={6}>
                 <Heading
-                  fontSize={{ base: 'lg', md: '3xl', lg: '5xl' }}
+                  fontSize={{ base: 'lg', md: '3xl', xl: '5xl' }}
                   textTransform={'uppercase'}
                 >
                   choose your look
@@ -165,15 +165,15 @@ const Home = () => {
             bgSize={'cover'}
             bgPos={'center'}
           >
-            <Flex
-              h={'full'}
-              align={'flex-end'}
-              pl={{ base: 6, lg: 20 }}
-              py={{ base: 7, lg: 24 }}
-            >
-              <VStack align={'flex-start'} spacing={0}>
+            <Flex h={'full'} align={'flex-end'}>
+              <VStack
+                align={'flex-start'}
+                spacing={0}
+                pl={{ base: 6, lg: 20 }}
+                py={{ base: 7, lg: 24 }}
+              >
                 <Heading
-                  fontSize={{ base: '3xl', md: '5xl', lg: '8xl' }}
+                  fontSize={{ base: '3xl', md: '5xl', xl: '8xl' }}
                   textTransform={'uppercase'}
                 >
                   Up to <br /> 40% off
@@ -190,15 +190,15 @@ const Home = () => {
             </Flex>
           </GridItem>
           <GridItem>
-            <Flex
-              bg={'#F3DCD2'}
-              h={'full'}
-              align={'center'}
-              pl={{ base: 6, lg: 20 }}
-            >
-              <VStack flex={1} align={'flex-start'} spacing={0}>
+            <Flex bg={'#F3DCD2'} h={'full'} align={'center'}>
+              <VStack
+                flex={1}
+                align={'flex-start'}
+                spacing={0}
+                pl={{ base: 6, lg: 20 }}
+              >
                 <Heading
-                  fontSize={{ base: 'lg', md: '3xl', lg: '5xl' }}
+                  fontSize={{ base: 'lg', md: '3xl', xl: '5xl' }}
                   textTransform={'uppercase'}
                 >
                   brand new style
@@ -215,6 +215,7 @@ const Home = () => {
               <Image
                 srcSet="img/home2-140.jpg 480w, img/home2-460.jpg 1980w"
                 flex={1}
+                flexShrink={0}
                 objectFit={'cover'}
                 alignSelf={'stretch'}
               />
