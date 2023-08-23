@@ -68,6 +68,57 @@ export const PRODUCTS: IProduct[] = [
   },
 ];
 
+export const PRODUCTS_WOMEN = [
+  {
+    id: 101,
+    title: 'top women',
+    price: 139,
+    description: 'Angels malu zip jeans slim black used',
+    category: 'women',
+    image: 'img/women1-340.jpg',
+    rating: {
+      rate: 4.6,
+      count: 400,
+    },
+  },
+  {
+    id: 102,
+    title: 'top women',
+    price: 139,
+    description: 'Angels malu zip jeans slim black used',
+    category: 'women',
+    image: 'img/women2-340.jpg',
+    rating: {
+      rate: 4.6,
+      count: 400,
+    },
+  },
+  {
+    id: 103,
+    title: 'top women',
+    price: 139,
+    description: 'Angels malu zip jeans slim black used',
+    category: 'women',
+    image: 'img/women3-340.jpg',
+    rating: {
+      rate: 4.6,
+      count: 400,
+    },
+  },
+  {
+    id: 104,
+    title: 'top women',
+    price: 139,
+    description: 'Angels malu zip jeans slim black used',
+    category: 'women',
+    image: 'img/women4-340.jpg',
+    rating: {
+      rate: 4.6,
+      count: 400,
+    },
+  },
+];
+
 export const LINKS = [
   { name: 'Home', to: '/', id: 1 },
   { name: 'Shop', to: 'products', id: 2 },
