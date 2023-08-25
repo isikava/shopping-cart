@@ -10,3 +10,8 @@ type IProduct = {
     count: number;
   };
 };
+
+type ICartItem = {
+  id: number;
+  qty: number;
+};

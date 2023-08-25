@@ -5,15 +5,20 @@ import {
   Heading,
   IconButton,
   Image,
-  Spacer,
   Text,
   Tooltip,
   VStack,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { HiShoppingBag } from 'react-icons/hi';
+import { increaseQuantity } from '@/pages/Router';
 
-export const ProductCard = ({ product }: { product: IProduct }) => {
+type Props = {
+  product: IProduct;
+  onIncrease: increaseQuantity;
+};
+
+export const ProductCard = ({ product, onIncrease }: Props) => {
   return (
     <Flex direction={'column'}>
       <Box
@@ -27,7 +32,6 @@ export const ProductCard = ({ product }: { product: IProduct }) => {
         <Image src={product.image} h={'100%'} fit={'contain'} />
       </Box>
 
-      {/* <Spacer /> */}
       <VStack align={'start'} spacing={0}>
         <Heading
           fontSize={{ base: 'xs', lg: 'md' }}
@@ -57,6 +61,7 @@ export const ProductCard = ({ product }: { product: IProduct }) => {
               size="lg"
               color={'gray.800'}
               _hover={{ color: 'black' }}
+              onClick={() => onIncrease(product.id)}
             />
           </Tooltip>
         </HStack>

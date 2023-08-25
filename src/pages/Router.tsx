@@ -1,33 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Root from './Root';
 import ErrorPage from './ErrorPage';
 import Home from './Home';
 import Products from './Products';
 import Checkout from './Checkout';
-import { api } from '@/api';
-import { PRODUCTS } from '@/data';
 import Components from './Components';
 
+export type getItemQuantity = (id: number) => number;
+export type deleteFromCart = (id: number) => void;
+export type increaseQuantity = (id: number) => void;
+export type decreaseQuantity = (id: number) => void;
+
 export const Router = () => {
-  const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
+  const [cart, setCart] = useState<ICartItem[]>([]);
 
-  useEffect(() => {
-    let ignore = false;
+  const getItemQuantity = (id: number) =>
+    cart.find((cp) => cp.id === id)?.qty || 0;
 
-    const getProducts = async () => {
-      const data = await api.getProducts();
-      if (!ignore) {
-        setProducts(data);
+  const deleteFromCart = (id: number) => {
+    setCart(cart.filter((cp) => cp.id !== id));
+  };
+
+  const increaseQuantity = (id: number) => {
+    setCart((currCart) => {
+      const exist = currCart.find((cp) => cp.id === id);
+      if (exist) {
+        return currCart.map((cp) => {
+          return cp.id === id ? { ...cp, qty: cp.qty + 1 } : cp;
+        });
+      } else {
+        return [...currCart, { id, qty: 1 }];
       }
-    };
+    });
+  };
 
-    // getProducts();
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
+  const decreaseQuantity = (id: number) => {
+    setCart((currCart) => {
+      const exist = currCart.find((cp) => cp.id === id);
+      if (exist?.qty === 1) {
+        return currCart.filter((cp) => cp.id !== id);
+      } else {
+        return currCart.map((cp) =>
+          cp.id === id ? { ...cp, qty: cp.qty - 1 } : cp
+        );
+      }
+    });
+  };
 
   const router = createBrowserRouter([
     {
@@ -41,7 +60,14 @@ export const Router = () => {
         },
         {
           path: '/products',
-          element: <Products products={products} />,
+          element: (
+            <Products
+              cart={cart}
+              onDeleteFromCart={deleteFromCart}
+              onIncrease={increaseQuantity}
+              onDecrease={decreaseQuantity}
+            />
+          ),
         },
         {
           path: '/checkout',
