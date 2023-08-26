@@ -6,6 +6,7 @@ import Home from './Home';
 import Products from './Products';
 import Checkout from './Checkout';
 import Components from './Components';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 export type getItemQuantity = (id: number) => number;
 export type deleteFromCart = (id: number) => void;
@@ -13,7 +14,7 @@ export type increaseQuantity = (id: number) => void;
 export type decreaseQuantity = (id: number) => void;
 
 export const Router = () => {
-  const [cart, setCart] = useState<ICartItem[]>([]);
+  const [cart, setCart] = useLocalStorage<ICartItem[]>('shopping-cart', []);
 
   const getItemQuantity = (id: number) =>
     cart.find((cp) => cp.id === id)?.qty || 0;
