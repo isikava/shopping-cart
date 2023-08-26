@@ -17,21 +17,13 @@ import { PRODUCTS, PRODUCTS_WOMEN } from '@/data';
 import { ProductCard } from '@/components/ProductCard';
 import { api } from '@/api';
 import { useState, useEffect } from 'react';
-import { deleteFromCart, increaseQuantity, decreaseQuantity } from './Router';
+import { increaseQuantity } from './Router';
 
 type Props = {
-  cart: ICartItem[];
-  onDeleteFromCart: deleteFromCart;
   onIncrease: increaseQuantity;
-  onDecrease: decreaseQuantity;
 };
 
-const Products = ({
-  cart,
-  onDeleteFromCart,
-  onIncrease,
-  onDecrease,
-}: Props) => {
+const Products = ({ onIncrease }: Props) => {
   const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
 
   useEffect(() => {
@@ -51,41 +43,11 @@ const Products = ({
     };
   }, []);
 
-  const cartQty = cart.reduce((qty, item) => qty + item.qty, 0);
-
-  const total = cart
-    .reduce((sum, cp) => {
-      const item = products.find((p) => p.id === cp.id);
-      return sum + (item?.price || 0) * cp.qty;
-    }, 0)
-    .toFixed(2);
-
   return (
     <Container maxW={'1980px'}>
       <Text fontSize={'sm'} color={'gray1'}>
         Home / Womens Dress / Best Chose
       </Text>
-
-      <Box>
-        {cart.map((cp) => {
-          const item = products.find((p) => p.id === cp.id);
-          return (
-            <div key={item?.id}>
-              <div>{item?.title}</div>
-              <div> Quantity: {cp.qty} </div>
-              <div>
-                <Button onClick={() => onDeleteFromCart(cp.id)}>Remove</Button>
-              </div>
-              <div>
-                <Button onClick={() => onDecrease(cp.id)}>-</Button>
-                <Button onClick={() => onIncrease(cp.id)}>+</Button>
-              </div>
-            </div>
-          );
-        })}
-        <div>Total Items: {cartQty} </div>
-        <div>Total: {total} </div>
-      </Box>
 
       <Grid
         templateColumns={{ base: '1fr', lg: '1fr 4fr' }}

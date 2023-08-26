@@ -89,11 +89,14 @@ export const Header = () => {
           {/* Bag */}
           <Flex align={'center'}>
             <IconButton
+              as={Link}
+              to="cart"
               aria-label="cart"
               icon={<Bag />}
               variant={'link'}
               size={'lg'}
             />
+
             <Text display={{ base: 'none', md: 'block' }} fontWeight={500}>
               0,00&nbsp;EUR
             </Text>

@@ -7,6 +7,7 @@ import Products from './Products';
 import Checkout from './Checkout';
 import Components from './Components';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import Cart from './Cart';
 
 export type getItemQuantity = (id: number) => number;
 export type deleteFromCart = (id: number) => void;
@@ -61,14 +62,7 @@ export const Router = () => {
         },
         {
           path: '/products',
-          element: (
-            <Products
-              cart={cart}
-              onDeleteFromCart={deleteFromCart}
-              onIncrease={increaseQuantity}
-              onDecrease={decreaseQuantity}
-            />
-          ),
+          element: <Products onIncrease={increaseQuantity} />,
         },
         {
           path: '/checkout',
@@ -77,6 +71,17 @@ export const Router = () => {
         {
           path: '/components',
           element: <Components />,
+        },
+        {
+          path: '/cart',
+          element: (
+            <Cart
+              cart={cart}
+              onDeleteFromCart={deleteFromCart}
+              onIncrease={increaseQuantity}
+              onDecrease={decreaseQuantity}
+            />
+          ),
         },
       ],
     },
