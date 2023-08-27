@@ -81,6 +81,17 @@ const variants = {
       borderColor: 'currentColor',
     },
   },
+  icon: {
+    color: 'black',
+    bg: 'main',
+    fontSize: 'xs',
+    fontFamily: 'body',
+    fontWeight: 'normal',
+
+    _hover: {
+      bg: '#D0E4F2',
+    },
+  },
 };
 
 export const Button = {

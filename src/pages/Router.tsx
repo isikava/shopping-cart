@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import Root from './Root';
 import ErrorPage from './ErrorPage';
 import Home from './Home';
 import Products from './Products';
 import Checkout from './Checkout';
 import Components from './Components';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import Cart from './Cart';
+import { Cart } from './Cart';
 
 export type getItemQuantity = (id: number) => number;
 export type deleteFromCart = (id: number) => void;
