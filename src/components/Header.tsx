@@ -8,10 +8,10 @@ import {
   VStack,
   Text,
   useDisclosure,
+  Center,
 } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
-import { ReactComponent as Logo } from '@/assets/logo.svg';
-import { ReactComponent as Bag } from '@/assets/cart-icon.svg';
+import { Logo, Bag } from '@/data/icons';
 import { LINKS } from '@/data';
 import { colors } from '@/theme/colors';
 const { brand } = colors;
@@ -22,9 +22,9 @@ export const Header = () => {
   return (
     <Box
       as="header"
-      py={{ base: 2, md: 9 }}
+      py={{ md: 9 }}
       px={{ base: 3, md: 6 }}
-      minH={{ base: '60px', lg: '115px' }}
+      minH={{ base: '48px', lg: '115px' }}
       bg="black"
       color="white"
       gap={4}
@@ -54,7 +54,13 @@ export const Header = () => {
           justify={{ base: 'center', md: 'start' }}
         >
           <Box as={Link} to="/">
-            <Logo />
+            <Logo
+              w={['66px', 20]}
+              h={'auto'}
+              color={'white'}
+              fill={'none'}
+              _hover={{ color: 'main' }}
+            />
           </Box>
         </Flex>
 
@@ -81,6 +87,7 @@ export const Header = () => {
           direction={'row'}
           align={'center'}
           spacing={2}
+          // mr={{ base: -1 }}
         >
           <Flex display={{ base: 'none', md: 'inline-flex' }} gap={1}>
             <NavLink to={'#'} name="Sign&nbsp;In" />
@@ -88,14 +95,32 @@ export const Header = () => {
           </Flex>
           {/* Bag */}
           <Flex align={'center'}>
-            <IconButton
-              as={Link}
-              to="cart"
-              aria-label="cart"
-              icon={<Bag />}
-              variant={'link'}
-              size={'lg'}
-            />
+            <Center position={'relative'}>
+              <IconButton
+                as={Link}
+                to="cart"
+                aria-label="View cart"
+                icon={<Bag w={'19px'} h={'22px'} />}
+                variant={'link'}
+                size={'lg'}
+                color={'white'}
+                minW={8}
+              />
+              <Center
+                position={'absolute'}
+                w={['14px']}
+                h={['15px']}
+                top={0}
+                right={0}
+                transform={'translate(-10%, -20%)'}
+                bg={'brand.500'}
+                color={'white'}
+              >
+                <Box as="span" fontSize={['xs', 'sm']} fontFamily={'heading'}>
+                  5
+                </Box>
+              </Center>
+            </Center>
 
             <Text display={{ base: 'none', md: 'block' }} fontWeight={500}>
               0,00&nbsp;EUR
