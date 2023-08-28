@@ -27,7 +27,7 @@ import {
   BFendi,
   BGucci,
   BVersace,
-} from '@/assets/icons';
+} from '@/data/icons';
 import { colors } from '@/theme/colors';
 
 const { divider } = colors;
