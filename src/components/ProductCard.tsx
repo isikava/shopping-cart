@@ -11,14 +11,14 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { HiShoppingBag } from 'react-icons/hi';
-import { increaseQuantity } from '@/pages/Router';
+import { addToCart } from '@/pages/Router';
 
 type Props = {
   product: IProduct;
-  onIncrease: increaseQuantity;
+  onAddToCart: addToCart;
 };
 
-export const ProductCard = ({ product, onIncrease }: Props) => {
+export const ProductCard = ({ product, onAddToCart }: Props) => {
   return (
     <Flex direction={'column'}>
       <Box
@@ -61,7 +61,7 @@ export const ProductCard = ({ product, onIncrease }: Props) => {
               size="lg"
               color={'gray.800'}
               _hover={{ color: 'black' }}
-              onClick={() => onIncrease(product.id)}
+              onClick={() => onAddToCart(product.id)}
             />
           </Tooltip>
         </HStack>

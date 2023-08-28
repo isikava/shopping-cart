@@ -1,7 +1,12 @@
 import { Box, HStack, Divider, VStack, Button, Text } from '@chakra-ui/react';
 import { DesktopCartItem } from './DesktopCartItem';
+import { CartProps } from '..';
 
-export const DesktopCart = () => {
+export const DesktopCart = ({
+  cart,
+  onDeleteFromCart,
+  onUpdateQuantity,
+}: CartProps) => {
   return (
     <Box>
       <HStack
@@ -31,9 +36,15 @@ export const DesktopCart = () => {
 
       <Divider my={6} />
 
-      <VStack spacing={4}>
-        <DesktopCartItem />
-        <DesktopCartItem />
+      <VStack spacing={4} align={'stretch'}>
+        {cart.map((cp) => (
+          <DesktopCartItem
+            key={cp.productId}
+            {...cp}
+            onDeleteFromCart={onDeleteFromCart}
+            onUpdateQuantity={onUpdateQuantity}
+          />
+        ))}
       </VStack>
 
       <Divider my={6} />

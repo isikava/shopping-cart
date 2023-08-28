@@ -1,4 +1,3 @@
-import { deleteFromCart, increaseQuantity, decreaseQuantity } from '../Router';
 import {
   Button as CButton,
   Box,
@@ -7,18 +6,13 @@ import {
   Divider,
   VStack,
   Input,
-  Flex,
   HStack,
   Text,
-  Spacer,
   InputGroup,
   InputRightElement,
-  StackDivider,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  Image,
-  IconButton,
   Stack,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
@@ -26,27 +20,26 @@ import { PRODUCTS, PRODUCTS_WOMEN } from '@/data';
 import { Button } from '@/components/Button';
 import { MobileCart } from './elements/MobileCart';
 import { DesktopCart } from './elements/DesktopCart';
+import { deleteFromCart, updateQuantity } from '../Router';
 
-type Props = {
+export type CartProps = {
   cart: ICartItem[];
   onDeleteFromCart: deleteFromCart;
-  onIncrease: increaseQuantity;
-  onDecrease: decreaseQuantity;
+  onUpdateQuantity: updateQuantity;
 };
 
 export const Cart = ({
   cart,
   onDeleteFromCart,
-  onIncrease,
-  onDecrease,
-}: Props) => {
+  onUpdateQuantity,
+}: CartProps) => {
   const products = PRODUCTS;
 
   const cartQty = cart.reduce((qty, item) => qty + item.qty, 0);
 
   const total = cart
     .reduce((sum, cp) => {
-      const item = products.find((p) => p.id === cp.id);
+      const item = products.find((p) => p.id === cp.productId);
       return sum + (item?.price || 0) * cp.qty;
     }, 0)
     .toFixed(2);
@@ -84,10 +77,18 @@ export const Cart = ({
       >
         {/* Cart Items */}
         <Box display={['block', 'none']}>
-          <MobileCart />
+          <MobileCart
+            cart={cart}
+            onDeleteFromCart={onDeleteFromCart}
+            onUpdateQuantity={onUpdateQuantity}
+          />
         </Box>
         <Box display={['none', 'block']} maxW={'4xl'}>
-          <DesktopCart />
+          <DesktopCart
+            cart={cart}
+            onDeleteFromCart={onDeleteFromCart}
+            onUpdateQuantity={onUpdateQuantity}
+          />
         </Box>
 
         {/* Total */}
@@ -128,7 +129,7 @@ export const Cart = ({
                 Subtotal
               </Heading>
               <Text fontSize={['sm', 'lg']} fontWeight={'medium'}>
-                119.00 EUR
+                {total} EUR
               </Text>
             </HStack>
             <HStack justifyContent={'space-between'}>
@@ -145,10 +146,10 @@ export const Cart = ({
             </HStack>
             <HStack justifyContent={'space-between'}>
               <Heading fontSize={['lg', '2xl']} fontWeight={'medium'}>
-                Subtotal
+                Order Total
               </Heading>
               <Text fontSize={['lg', '2xl']} fontWeight={'medium'}>
-                119.00 EUR
+                {total} EUR
               </Text>
             </HStack>
             <Button variant={'brand'} size={['md', 'lg']}>
@@ -157,35 +158,6 @@ export const Cart = ({
           </VStack>
         </VStack>
       </Stack>
-
-      {/* <Image src="https://britishretro.co.uk/wp-content/uploads/2019/10/red-1950s-style-dress.jpg" /> */}
-
-      {/* <Divider h={16} /> */}
-
-      {/* <Spacer h={'2000px'} /> */}
-
-      {/* <Box display={'none'}>
-        {cart.map((cp) => {
-          const item = products.find((p) => p.id === cp.id);
-          return (
-            <div key={item?.id}>
-              <div>{item?.title}</div>
-              <div> Quantity: {cp.qty} </div>
-              <div>
-                <CButton onClick={() => onDeleteFromCart(cp.id)}>
-                  Remove
-                </CButton>
-              </div>
-              <div>
-                <CButton onClick={() => onDecrease(cp.id)}>-</CButton>
-                <CButton onClick={() => onIncrease(cp.id)}>+</CButton>
-              </div>
-            </div>
-          );
-        })}
-        <div>Total Items: {cartQty} </div>
-        <div>Total: {total} </div>
-      </Box> */}
     </Container>
   );
 };

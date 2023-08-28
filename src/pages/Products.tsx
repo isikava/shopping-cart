@@ -17,13 +17,13 @@ import { PRODUCTS, PRODUCTS_WOMEN } from '@/data';
 import { ProductCard } from '@/components/ProductCard';
 import { api } from '@/api';
 import { useState, useEffect } from 'react';
-import { increaseQuantity } from './Router';
+import { addToCart } from './Router';
 
-type Props = {
-  onIncrease: increaseQuantity;
+type ProductsProps = {
+  onAddToCart: addToCart;
 };
 
-const Products = ({ onIncrease }: Props) => {
+export const Products = ({ onAddToCart }: ProductsProps) => {
   const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const Products = ({ onIncrease }: Props) => {
             spacing={{ base: 4, md: 5, lg: 6 }}
           >
             {products.map((p) => (
-              <ProductCard key={p.id} product={p} onIncrease={onIncrease} />
+              <ProductCard key={p.id} product={p} onAddToCart={onAddToCart} />
             ))}
           </SimpleGrid>
         </VStack>
@@ -93,5 +93,3 @@ const Products = ({ onIncrease }: Props) => {
     </Container>
   );
 };
-
-export default Products;

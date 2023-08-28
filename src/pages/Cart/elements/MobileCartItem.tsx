@@ -1,6 +1,5 @@
 import {
   Box,
-  Button as CButton,
   HStack,
   Heading,
   IconButton,
@@ -11,31 +10,51 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { Counter } from '@/components/Counter';
-import { CloseIcon, EditIcon } from '@chakra-ui/icons';
+import { CloseIcon } from '@chakra-ui/icons';
+import { PRODUCTS } from '@/data';
+import { deleteFromCart, updateQuantity } from '@/pages/Router';
 
-export const MobileCartItem = () => {
+export type CartItemProps = ICartItem & {
+  onDeleteFromCart: deleteFromCart;
+  onUpdateQuantity: updateQuantity;
+};
+
+export const MobileCartItem = ({
+  productId,
+  qty,
+  onDeleteFromCart,
+  onUpdateQuantity,
+}: CartItemProps) => {
+  const item = PRODUCTS.find((p) => p.id === productId);
+
+  const handleChangeQuantity = (_: string, newQty: number) => {
+    onUpdateQuantity(productId, newQty);
+  };
+
+  if (!item) return null;
+
   return (
     <Box fontFamily={'heading'} fontWeight={'normal'}>
       <HStack align={'flex-start'} spacing={4}>
         <Box flex={0.5}>
-          <Image src="https://britishretro.co.uk/wp-content/uploads/2019/10/red-1950s-style-dress.jpg" />
+          <Image src={item.image} />
         </Box>
         <VStack flex={1} align={'flex-start'}>
           <Heading fontSize={'lg'} fontWeight={'normal'}>
-            Angels malu zip jeans slim black used
+            {item.title}
           </Heading>
           <List spacing={2}>
-            <ListItem fontFamily={'heading'} fontSize={'sm'} color={'dark2'}>
+            {/* <ListItem fontFamily={'heading'} fontSize={'sm'} color={'dark2'}>
               <Text as="span" color={'#BDBDBD'}>
                 Size:{' '}
               </Text>
               W31/L34
-            </ListItem>
+            </ListItem> */}
             <ListItem fontFamily={'heading'} fontSize={'sm'} color={'dark2'}>
               <Text as="span" color={'#BDBDBD'}>
-                Art.No.:
+                Art.No.:{' '}
               </Text>
-              434536465
+              {item.id}
             </ListItem>
           </List>
         </VStack>
@@ -45,6 +64,7 @@ export const MobileCartItem = () => {
             size={['xs', 'sm']}
             aria-label="remove from cart"
             icon={<CloseIcon boxSize={[2, 3]} />}
+            onClick={() => onDeleteFromCart(productId)}
           ></IconButton>
           {/* <IconButton
             variant={'icon'}
@@ -59,12 +79,12 @@ export const MobileCartItem = () => {
         Quantity
       </Text>
       <HStack justify={'space-between'} align={'center'}>
-        <Counter />
+        <Counter value={qty} onChange={handleChangeQuantity} />
         <Text fontSize={'xl'}>
           <Text as="span" color={'#BDBDBD'} fontSize={'sm'}>
             Price:{' '}
           </Text>
-          90,00 EUR
+          ${item.price} EUR
         </Text>
       </HStack>
     </Box>

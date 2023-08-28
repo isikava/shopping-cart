@@ -12,6 +12,6 @@ type IProduct = {
 };
 
 type ICartItem = {
-  id: number;
+  productId: number;
   qty: number;
 };

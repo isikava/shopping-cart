@@ -1,51 +1,41 @@
-import { useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import Root from './Root';
 import ErrorPage from './ErrorPage';
 import Home from './Home';
-import Products from './Products';
+import { Products } from './Products';
 import Checkout from './Checkout';
 import Components from './Components';
 import { Cart } from './Cart';
 
-export type getItemQuantity = (id: number) => number;
 export type deleteFromCart = (id: number) => void;
-export type increaseQuantity = (id: number) => void;
-export type decreaseQuantity = (id: number) => void;
+export type addToCart = (id: number) => void;
+export type updateQuantity = (id: number, newQty: number) => void;
 
 export const Router = () => {
   const [cart, setCart] = useLocalStorage<ICartItem[]>('shopping-cart', []);
 
-  const getItemQuantity = (id: number) =>
-    cart.find((cp) => cp.id === id)?.qty || 0;
-
   const deleteFromCart = (id: number) => {
-    setCart(cart.filter((cp) => cp.id !== id));
+    setCart(cart.filter((cp) => cp.productId !== id));
   };
 
-  const increaseQuantity = (id: number) => {
+  const updateQuantity = (id: number, newQty: number) => {
+    setCart(
+      cart.map((cp) => {
+        return cp.productId === id ? { ...cp, qty: newQty } : cp;
+      })
+    );
+  };
+
+  const addToCart = (productId: number) => {
     setCart((currCart) => {
-      const exist = currCart.find((cp) => cp.id === id);
+      const exist = currCart.find((cp) => cp.productId === productId);
       if (exist) {
         return currCart.map((cp) => {
-          return cp.id === id ? { ...cp, qty: cp.qty + 1 } : cp;
+          return cp.productId === productId ? { ...cp, qty: cp.qty + 1 } : cp;
         });
       } else {
-        return [...currCart, { id, qty: 1 }];
-      }
-    });
-  };
-
-  const decreaseQuantity = (id: number) => {
-    setCart((currCart) => {
-      const exist = currCart.find((cp) => cp.id === id);
-      if (exist?.qty === 1) {
-        return currCart.filter((cp) => cp.id !== id);
-      } else {
-        return currCart.map((cp) =>
-          cp.id === id ? { ...cp, qty: cp.qty - 1 } : cp
-        );
+        return [...currCart, { productId, qty: 1 }];
       }
     });
   };
@@ -62,7 +52,7 @@ export const Router = () => {
         },
         {
           path: '/products',
-          element: <Products onIncrease={increaseQuantity} />,
+          element: <Products onAddToCart={addToCart} />,
         },
         {
           path: '/checkout',
@@ -78,8 +68,7 @@ export const Router = () => {
             <Cart
               cart={cart}
               onDeleteFromCart={deleteFromCart}
-              onIncrease={increaseQuantity}
-              onDecrease={decreaseQuantity}
+              onUpdateQuantity={updateQuantity}
             />
           ),
         },

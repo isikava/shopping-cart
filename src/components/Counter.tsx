@@ -4,9 +4,10 @@ import {
   NumberDecrementStepper,
   NumberInputField,
   NumberIncrementStepper,
+  NumberInputProps,
 } from '@chakra-ui/react';
 
-export const Counter = () => {
+export const Counter = ({ value, onChange }: NumberInputProps) => {
   const stepper = {
     fontSize: '2xl',
     color: 'divider',
@@ -17,7 +18,7 @@ export const Counter = () => {
   };
 
   return (
-    <NumberInput defaultValue={1} min={1} allowMouseWheel>
+    <NumberInput value={value} onChange={onChange} min={1} allowMouseWheel>
       <HStack
         spacing={0}
         border={'1px'}
