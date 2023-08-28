@@ -2,10 +2,14 @@ import { Outlet } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Box } from '@chakra-ui/react';
 
-const Root = () => {
+type RootProps = {
+  cart: ICartItem[];
+};
+
+const Root = ({ cart }: RootProps) => {
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <Box as="main">
         <Outlet />
       </Box>

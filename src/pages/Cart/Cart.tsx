@@ -21,6 +21,7 @@ import { Button } from '@/components/Button';
 import { MobileCart } from './elements/MobileCart';
 import { DesktopCart } from './elements/DesktopCart';
 import { deleteFromCart, updateQuantity } from '../Router';
+import { calcTotal } from './utils';
 
 export type CartProps = {
   cart: ICartItem[];
@@ -35,14 +36,7 @@ export const Cart = ({
 }: CartProps) => {
   const products = PRODUCTS;
 
-  const cartQty = cart.reduce((qty, item) => qty + item.qty, 0);
-
-  const total = cart
-    .reduce((sum, cp) => {
-      const item = products.find((p) => p.id === cp.productId);
-      return sum + (item?.price || 0) * cp.qty;
-    }, 0)
-    .toFixed(2);
+  const total = calcTotal(cart, products);
 
   return (
     <Container maxW={'1440px'}>

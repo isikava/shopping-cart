@@ -12,12 +12,22 @@ import {
 } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { Logo, Bag } from '@/data/icons';
-import { LINKS } from '@/data';
+import { LINKS, PRODUCTS } from '@/data';
 import { colors } from '@/theme/colors';
+import { calcQuantity, calcTotal } from '@/pages/Cart/utils';
 const { brand } = colors;
 
-export const Header = () => {
+type HeaderProps = {
+  cart: ICartItem[];
+};
+
+export const Header = ({ cart }: HeaderProps) => {
   const { isOpen, onToggle } = useDisclosure();
+
+  const products = PRODUCTS;
+
+  const cartQty = calcQuantity(cart);
+  const total = calcTotal(cart, products);
 
   return (
     <Box
@@ -94,7 +104,7 @@ export const Header = () => {
             <NavLink to={'#'} name="Sign&nbsp;Up" />
           </Flex>
           {/* Bag */}
-          <Flex align={'center'}>
+          <Flex align={'center'} gap={3}>
             <Center position={'relative'}>
               <IconButton
                 as={Link}
@@ -106,24 +116,26 @@ export const Header = () => {
                 color={'white'}
                 minW={8}
               />
-              <Center
-                position={'absolute'}
-                w={['14px']}
-                h={['15px']}
-                top={0}
-                right={0}
-                transform={'translate(-10%, -20%)'}
-                bg={'brand.500'}
-                color={'white'}
-              >
-                <Box as="span" fontSize={['xs', 'sm']} fontFamily={'heading'}>
-                  5
-                </Box>
-              </Center>
+              {cartQty > 0 && (
+                <Center
+                  position={'absolute'}
+                  w={['14px']}
+                  h={['15px']}
+                  top={0}
+                  right={0}
+                  transform={'translate(-10%, -20%)'}
+                  bg={'brand.500'}
+                  color={'white'}
+                >
+                  <Box as="span" fontSize={['xs', 'sm']} fontFamily={'heading'}>
+                    {cartQty}
+                  </Box>
+                </Center>
+              )}
             </Center>
 
             <Text display={{ base: 'none', md: 'block' }} fontWeight={500}>
-              0,00&nbsp;EUR
+              {total}&nbsp;EUR
             </Text>
           </Flex>
         </Stack>
