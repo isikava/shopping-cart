@@ -1,4 +1,5 @@
 import { Box, HStack, Divider, VStack, Button, Text } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { DesktopCartItem } from './DesktopCartItem';
 import { CartProps } from '..';
 
@@ -50,7 +51,9 @@ export const DesktopCart = ({
       <Divider my={6} />
 
       <HStack justify={'space-between'}>
-        <Button variant={'muted'}>continue shopping</Button>
+        <Button as={Link} to="/products" variant={'muted'}>
+          continue shopping
+        </Button>
         <Button variant={'muted'}>clear shopping cart</Button>
       </HStack>
     </Box>

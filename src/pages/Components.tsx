@@ -28,6 +28,7 @@ import { BiHeart } from 'react-icons/bi';
 import { Paginate } from '@/components/Paginate';
 import { Counter } from '@/components/Counter';
 import { MinusIcon, AddIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 
 const Components = () => {
   return (
@@ -73,10 +74,17 @@ const Components = () => {
             <CButton variant={'outline'}>Outline</CButton>
           </VStack>
           <VStack>
-            <Button variant={'brand'}>Add to bag</Button>
-            <Button variant={'brand'} size={{ base: '-sm', md: '-md' }}>
+            <Button as={Link} to="/" variant={'brand'}>
               Add to bag
             </Button>
+            <CButton
+              as={Link}
+              to="/"
+              variant={'brand'}
+              size={{ base: '-sm', md: '-md' }}
+            >
+              Add to bag
+            </CButton>
             <Button variant={'second'} leftIcon={<BiHeart />}>
               My button
             </Button>

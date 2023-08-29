@@ -3,7 +3,6 @@ import {
   Center,
   Container,
   GridItem,
-  HStack,
   Heading,
   Image,
   SimpleGrid,
@@ -29,6 +28,7 @@ import {
   BVersace,
 } from '@/data/icons';
 import { colors } from '@/theme/colors';
+import { Link } from 'react-router-dom';
 
 const { divider } = colors;
 
@@ -71,7 +71,12 @@ const Home = () => {
                 >
                   SUMMER SALE GEt 30% OFF On all dress.
                 </Heading>
-                <Button variant={'transp'} size={{ base: '-sm', md: '-md' }}>
+                <Button
+                  as={Link}
+                  to="/products"
+                  variant={'transp'}
+                  size={{ base: '-sm', md: '-md' }}
+                >
                   shop now
                 </Button>
               </VStack>
@@ -155,7 +160,9 @@ const Home = () => {
                 >
                   See our clothing collections
                 </Text>
-                <Button variant={'transp'}>See offers</Button>
+                <Button as={Link} to="/products" variant={'transp'}>
+                  See offers
+                </Button>
               </VStack>
             </Flex>
           </GridItem>
@@ -185,7 +192,9 @@ const Home = () => {
                 >
                   Special offers and great deals
                 </Text>
-                <Button variant={'transp'}>shop now</Button>
+                <Button as={Link} to="/products" variant={'transp'}>
+                  shop now
+                </Button>
               </VStack>
             </Flex>
           </GridItem>
@@ -210,7 +219,9 @@ const Home = () => {
                 >
                   Popular clothing brands
                 </Text>
-                <Button variant={'transp'}>See offers</Button>
+                <Button as={Link} to="/products" variant={'transp'}>
+                  See offers
+                </Button>
               </VStack>
               <Image
                 srcSet="img/home2-140.jpg 480w, img/home2-460.jpg 1980w"

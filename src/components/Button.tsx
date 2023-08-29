@@ -1,15 +1,12 @@
-import { Button as CButton, ButtonProps } from '@chakra-ui/react';
+import { Button as CButton, ButtonProps, forwardRef } from '@chakra-ui/react';
 
-type Props = ButtonProps & {
-  variant?: 'brand' | 'second' | 'muted' | 'transp' | 'transpWhite';
-};
-
-export const Button = ({ variant = 'brand', children, ...rest }: Props) => {
+export const Button = forwardRef<ButtonProps, 'button'>((props, ref) => {
+  const { children, ...rest } = props;
   const size = { base: '-sm', md: '-md' };
 
   return (
-    <CButton variant={variant} size={size} {...rest}>
+    <CButton size={size} ref={ref} {...rest}>
       {children}
     </CButton>
   );
-};
+});
