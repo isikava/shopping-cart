@@ -1,23 +1,18 @@
 import {
-  Box,
-  Button,
   Container,
-  Divider,
   Flex,
   Grid,
-  HStack,
   Select,
   SimpleGrid,
-  Stack,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 import { PRODUCTS, PRODUCTS_WOMEN } from '@/data';
-import { ProductCard } from '@/components/ProductCard';
+import { ProductCard } from './elements/ProductCard';
 import { api } from '@/api';
 import { useState, useEffect } from 'react';
-import { addToCart } from './Router';
+import { addToCart } from '../Router';
+import { Filter } from './elements/Filter';
 
 type ProductsProps = {
   onAddToCart: addToCart;
@@ -50,18 +45,11 @@ export const Products = ({ onAddToCart }: ProductsProps) => {
       </Text>
 
       <Grid
-        templateColumns={{ base: '1fr', lg: '1fr 4fr' }}
+        templateColumns={{ base: '1fr', xl: '1fr 4fr' }}
         gap={4}
         minH={'full'}
       >
-        {/* Filter */}
-        <VStack
-          as={'aside'}
-          // display={{ base: 'none', md: 'flex' }}
-          borderRight={{ lg: '2px solid #C4C4C4' }}
-        >
-          <Text>Filter</Text>
-        </VStack>
+        <Filter />
 
         {/* Products View */}
         <VStack
@@ -81,7 +69,7 @@ export const Products = ({ onAddToCart }: ProductsProps) => {
 
           {/* Products List */}
           <SimpleGrid
-            columns={{ base: 2, md: 3, lg: 4 }}
+            columns={{ base: 2, sm: 3, md: 4 }}
             spacing={{ base: 4, md: 5, lg: 6 }}
           >
             {products.map((p) => (

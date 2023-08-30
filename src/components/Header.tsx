@@ -126,6 +126,7 @@ export const Header = ({ cart }: HeaderProps) => {
                   transform={'translate(-10%, -20%)'}
                   bg={'brand.500'}
                   color={'white'}
+                  userSelect={'none'}
                 >
                   <Box as="span" fontSize={['xs', 'sm']} fontFamily={'heading'}>
                     {cartQty}
