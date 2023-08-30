@@ -1,7 +1,4 @@
-import { brandRing } from './button';
-
 export const controlStyle = {
-  ...brandRing,
   _hover: {
     borderColor: 'dark2',
   },
