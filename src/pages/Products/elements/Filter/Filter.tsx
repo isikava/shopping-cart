@@ -13,7 +13,7 @@ export const Filter = ({
 }: FilterProps) => {
   return (
     <VStack as={'aside'} align={'flex-start'}>
-      <Heading fontSize={['sm', 'md']} mb={2}>
+      <Heading fontSize={['sm', 'md', 'xl']} mb={[2, 4, 6]}>
         Category
       </Heading>
       <CheckboxGroup size={['sm', 'md']} value={selectedCategories}>

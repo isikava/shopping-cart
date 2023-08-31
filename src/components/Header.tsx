@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink as RNavLink } from 'react-router-dom';
 import {
   Box,
   Collapse,
@@ -100,8 +100,8 @@ export const Header = ({ cart }: HeaderProps) => {
           // mr={{ base: -1 }}
         >
           <Flex display={{ base: 'none', md: 'inline-flex' }} gap={1}>
-            <NavLink to={'#'} name="Sign&nbsp;In" />
-            <NavLink to={'#'} name="Sign&nbsp;Up" />
+            <NavLink to={'sign-in'} name="Sign&nbsp;In" />
+            <NavLink to={'sign-up'} name="Sign&nbsp;Up" />
           </Flex>
           {/* Bag */}
           <Flex align={'center'} gap={3}>
@@ -149,8 +149,8 @@ export const Header = ({ cart }: HeaderProps) => {
             {LINKS.map((l) => (
               <NavLink key={l.id} {...l} />
             ))}
-            <NavLink to={'#'} name="Sign&nbsp;In" />
-            <NavLink to={'#'} name="Sign&nbsp;Up" />
+            <NavLink to={'sign-in'} name="Sign&nbsp;In" />
+            <NavLink to={'sign-up'} name="Sign&nbsp;Up" />
           </VStack>
         </Stack>
       </Collapse>
@@ -161,7 +161,7 @@ export const Header = ({ cart }: HeaderProps) => {
 const NavLink = ({ name, to }: { name: string; to: string }) => {
   return (
     <Box
-      as={Link}
+      as={RNavLink}
       to={to}
       py={1}
       px={2}
@@ -170,7 +170,9 @@ const NavLink = ({ name, to }: { name: string; to: string }) => {
       fontWeight={600}
       textTransform={'uppercase'}
       borderBottom={'2px solid transparent'}
+      transition={'200ms ease'}
       _hover={{ borderBottom: `2px solid ${brand[500]}` }}
+      _activeLink={{ borderBottom: `2px solid ${brand[500]}` }}
     >
       {name}
     </Box>
