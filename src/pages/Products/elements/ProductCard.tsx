@@ -7,7 +7,6 @@ import {
   Image,
   Text,
   Tooltip,
-  VStack,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { HiShoppingBag } from 'react-icons/hi';
@@ -20,40 +19,35 @@ type Props = {
 
 export const ProductCard = ({ product, onAddToCart }: Props) => {
   return (
-    <Flex direction={'column'}>
-      <Box
-        flex={1}
-        as={Link}
-        to={`${product.id}`}
-        display={'block'}
-        w={'full'}
-        mb={{ base: 2 }}
-      >
-        <Image src={product.image} h={'100%'} fit={'contain'} />
+    <Flex direction={'column'} gap={[2, null, 4]}>
+      <Box flex={1} as={Link} to={`${product.id}`} display={'block'} w={'full'}>
+        <Image src={product.image} h={'full'} maxH={'450px'} fit={'contain'} />
       </Box>
 
-      <VStack align={'start'} spacing={0}>
-        <Heading
-          fontSize={{ base: 'xs', lg: 'md' }}
+      <Box>
+        <Text
+          fontFamily={'heading'}
+          fontWeight={'semibold'}
+          fontSize={{ base: 'xs', lg: 'sm' }}
           color={'divider'}
           textTransform={'uppercase'}
           noOfLines={1}
         >
-          {product.title}
-        </Heading>
-        <Text
+          {product.category}
+        </Text>
+        <Heading
           fontSize={{ base: 'sm', md: 'md', lg: 'lg' }}
           fontWeight={'light'}
           mb={{ base: 1, md: 2, lg: 4 }}
-          noOfLines={2}
+          noOfLines={1}
         >
-          {product.description}
-        </Text>
+          {product.title}
+        </Heading>
         <HStack align={'center'}>
           <Heading fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}>
             {product.price} EUR
           </Heading>
-          <Tooltip label="Add to cart">
+          <Tooltip label="Add to bag">
             <IconButton
               icon={<HiShoppingBag fontSize="24px" />}
               variant={'link'}
@@ -65,7 +59,7 @@ export const ProductCard = ({ product, onAddToCart }: Props) => {
             />
           </Tooltip>
         </HStack>
-      </VStack>
+      </Box>
     </Flex>
   );
 };
