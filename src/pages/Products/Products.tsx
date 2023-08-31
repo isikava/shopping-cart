@@ -1,18 +1,31 @@
 import {
+  Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Button,
   Container,
+  Divider,
   Flex,
   Grid,
+  Heading,
+  Modal,
+  ModalContent,
+  ModalOverlay,
   Select,
   SimpleGrid,
   Text,
   VStack,
+  useDisclosure,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { PRODUCTS, PRODUCTS_WOMEN } from '@/data';
 import { ProductCard } from './elements/ProductCard';
 import { api } from '@/api';
 import { useState, useEffect, useMemo } from 'react';
 import { addToCart } from '../Router';
 import { Filter } from './elements/Filter';
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 
 type ProductsProps = {
   onAddToCart: addToCart;
@@ -21,6 +34,7 @@ type ProductsProps = {
 export const Products = ({ onAddToCart }: ProductsProps) => {
   const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const categories = useMemo(
     () => [...new Set(products.map((p) => p.category))],
@@ -62,35 +76,102 @@ export const Products = ({ onAddToCart }: ProductsProps) => {
 
   return (
     <Container maxW={'1980px'}>
-      <Text fontSize={'sm'} color={'gray1'}>
-        Home / Womens Dress / Best Chose
-      </Text>
+      <VStack align={'flex-start'} mb={[0, 4]}>
+        <Breadcrumb fontSize="sm" color={'gray1'} py={2}>
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/">
+              Home
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink>Products</BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </VStack>
 
       <Grid
         templateColumns={{ base: '1fr', xl: '1fr 4fr' }}
-        gap={4}
-        minH={'full'}
+        gap={8}
+        minH={'100vh'}
       >
-        <Filter
-          categories={categories}
-          selectedCategories={selectedCategories}
-          onCategoryChange={handleCategoryChange}
-        />
+        {/* Desktop Filter */}
+        <Box
+          display={{ base: 'none', xl: 'block' }}
+          borderRight={'2px solid #C4C4C4'}
+        >
+          <Filter
+            categories={categories}
+            selectedCategories={selectedCategories}
+            onCategoryChange={handleCategoryChange}
+          />
+        </Box>
 
         {/* Products View */}
         <VStack
-          alignItems={{ base: 'stretch', md: 'flex-end' }}
+          alignItems={{ base: 'stretch', xl: 'flex-end' }}
           spacing={{ base: 4, md: 6 }}
         >
-          <Flex>
-            <Select
-              placeholder="price"
-              fontFamily={'heading'}
-              textTransform={'uppercase'}
-            >
-              <option value="1">price (High to Low)</option>
-              <option value="2">price (Low to High)</option>
-            </Select>
+          <Flex
+            direction={{ base: 'column', md: 'row' }}
+            justify={'space-between'}
+          >
+            {/* Mobile Filter */}
+            <Box display={{ base: 'block', xl: 'none' }}>
+              <Button
+                variant={'outline'}
+                w={['full', null, 40]}
+                borderColor={'divider'}
+                fontSize={'md'}
+                fontWeight={'normal'}
+                display={'flex'}
+                justifyContent={'space-between'}
+                rightIcon={<ChevronDownIcon fontSize={'xl'} />}
+                onClick={onOpen}
+              >
+                Filter
+              </Button>
+              <Modal size={'full'} onClose={onClose} isOpen={isOpen}>
+                <ModalOverlay />
+                <ModalContent>
+                  <Button
+                    variant={'solid'}
+                    color={'white'}
+                    bg={'black'}
+                    _hover={{
+                      bg: 'dark2',
+                    }}
+                    fontSize={'md'}
+                    fontWeight={'normal'}
+                    w={'full'}
+                    display={'flex'}
+                    justifyContent={'space-between'}
+                    rightIcon={<ChevronUpIcon fontSize={'xl'} />}
+                    onClick={onClose}
+                  >
+                    Filter
+                  </Button>
+                  <Box bg={'white'} p={4}>
+                    <Filter
+                      categories={categories}
+                      selectedCategories={selectedCategories}
+                      onCategoryChange={handleCategoryChange}
+                    />
+                  </Box>
+                </ModalContent>
+              </Modal>
+            </Box>
+
+            {/* Sort by price */}
+            <Flex display={{ base: 'none', md: 'flex' }}>
+              <Select
+                placeholder="price"
+                fontFamily={'heading'}
+                textTransform={'uppercase'}
+              >
+                <option value="1">price (High to Low)</option>
+                <option value="2">price (Low to High)</option>
+              </Select>
+            </Flex>
           </Flex>
 
           {/* Products List */}

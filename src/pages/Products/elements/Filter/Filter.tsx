@@ -12,27 +12,24 @@ export const Filter = ({
   onCategoryChange,
 }: FilterProps) => {
   return (
-    <VStack
-      as={'aside'}
-      align={'flex-start'}
-      borderRight={{ lg: '2px solid #C4C4C4' }}
-    >
+    <VStack as={'aside'} align={'flex-start'}>
       <Heading fontSize={['sm', 'md']} mb={2}>
         Category
       </Heading>
-      <CheckboxGroup size={['sm', 'md']}>
+      <CheckboxGroup size={['sm', 'md']} value={selectedCategories}>
         <VStack align={'flex-start'} spacing={[1, 4]}>
-          {categories.map((c: any) => (
-            <Checkbox
-              key={c}
-              value={c}
-              isChecked={selectedCategories.includes(c)}
-              onChange={() => onCategoryChange(c)}
-              textTransform={'capitalize'}
-            >
-              {c}
-            </Checkbox>
-          ))}
+          {categories.map((c: any) => {
+            return (
+              <Checkbox
+                key={c}
+                value={c}
+                onChange={() => onCategoryChange(c)}
+                textTransform={'capitalize'}
+              >
+                {c}
+              </Checkbox>
+            );
+          })}
         </VStack>
       </CheckboxGroup>
     </VStack>
