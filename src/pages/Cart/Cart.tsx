@@ -17,27 +17,13 @@ import {
   Center,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { PRODUCTS, PRODUCTS_WOMEN } from '@/data';
 import { Button } from '@/components/Button';
 import { MobileCart } from './elements/MobileCart';
 import { DesktopCart } from './elements/DesktopCart';
-import { deleteFromCart, updateQuantity } from '../Router';
-import { calcQuantity, calcTotal } from './utils';
+import { useShopState } from '@/context/ShopContext';
 
-export type CartProps = {
-  cart: ICartItem[];
-  onDeleteFromCart: deleteFromCart;
-  onUpdateQuantity: updateQuantity;
-};
-
-export const Cart = ({
-  cart,
-  onDeleteFromCart,
-  onUpdateQuantity,
-}: CartProps) => {
-  const products = PRODUCTS;
-
-  const total = calcTotal(cart, products);
+export const Cart = () => {
+  const { cart, subtotal } = useShopState();
 
   return (
     <Container maxW={'1440px'}>
@@ -73,18 +59,10 @@ export const Cart = ({
         >
           {/* Cart Items */}
           <Box display={['block', 'none']}>
-            <MobileCart
-              cart={cart}
-              onDeleteFromCart={onDeleteFromCart}
-              onUpdateQuantity={onUpdateQuantity}
-            />
+            <MobileCart />
           </Box>
           <Box display={['none', 'block']} maxW={'4xl'}>
-            <DesktopCart
-              cart={cart}
-              onDeleteFromCart={onDeleteFromCart}
-              onUpdateQuantity={onUpdateQuantity}
-            />
+            <DesktopCart />
           </Box>
 
           {/* Total */}
@@ -125,7 +103,7 @@ export const Cart = ({
                   Subtotal
                 </Heading>
                 <Text fontSize={['sm', 'lg']} fontWeight={'medium'}>
-                  {total} EUR
+                  {subtotal.toFixed(2)} EUR
                 </Text>
               </HStack>
               <HStack justifyContent={'space-between'}>
@@ -145,7 +123,7 @@ export const Cart = ({
                   Order Total
                 </Heading>
                 <Text fontSize={['lg', '2xl']} fontWeight={'medium'}>
-                  {total} EUR
+                  {subtotal.toFixed(2)} EUR
                 </Text>
               </HStack>
               <Button variant={'brand'} size={['md', 'lg']}>

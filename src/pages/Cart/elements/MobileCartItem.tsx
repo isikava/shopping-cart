@@ -11,24 +11,15 @@ import {
 } from '@chakra-ui/react';
 import { Counter } from '@/components/Counter';
 import { CloseIcon } from '@chakra-ui/icons';
-import { PRODUCTS } from '@/data';
-import { deleteFromCart, updateQuantity } from '@/pages/Router';
+import { useShopState } from '@/context/ShopContext';
 
-export type CartItemProps = ICartItem & {
-  onDeleteFromCart: deleteFromCart;
-  onUpdateQuantity: updateQuantity;
-};
+export const MobileCartItem = ({ productId, qty }: ICartItem) => {
+  const { products, deleteFromCart, updateQuantity } = useShopState();
 
-export const MobileCartItem = ({
-  productId,
-  qty,
-  onDeleteFromCart,
-  onUpdateQuantity,
-}: CartItemProps) => {
-  const item = PRODUCTS.find((p) => p.id === productId);
+  const item = products.find((p) => p.id === productId);
 
   const handleChangeQuantity = (_: string, newQty: number) => {
-    onUpdateQuantity(productId, newQty);
+    updateQuantity(productId, newQty);
   };
 
   if (!item) return null;
@@ -44,12 +35,6 @@ export const MobileCartItem = ({
             {item.title}
           </Heading>
           <List spacing={2}>
-            {/* <ListItem fontFamily={'heading'} fontSize={'sm'} color={'dark2'}>
-              <Text as="span" color={'#BDBDBD'}>
-                Size:{' '}
-              </Text>
-              W31/L34
-            </ListItem> */}
             <ListItem fontFamily={'heading'} fontSize={'sm'} color={'dark2'}>
               <Text as="span" color={'#BDBDBD'}>
                 Art.No.:{' '}
@@ -64,7 +49,7 @@ export const MobileCartItem = ({
             size={['xs', 'sm']}
             aria-label="remove from cart"
             icon={<CloseIcon boxSize={[2, 3]} />}
-            onClick={() => onDeleteFromCart(productId)}
+            onClick={() => deleteFromCart(productId)}
           ></IconButton>
           {/* <IconButton
             variant={'icon'}

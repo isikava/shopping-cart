@@ -10,14 +10,14 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { HiShoppingBag } from 'react-icons/hi';
-import { addToCart } from '@/pages/Router';
+import { addToCart } from '@/context/ShopContext';
 
-type Props = {
+type ProductCardProps = {
   product: IProduct;
   onAddToCart: addToCart;
 };
 
-export const ProductCard = ({ product, onAddToCart }: Props) => {
+export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   return (
     <Flex direction={'column'} gap={[2, null, 4]}>
       <Box flex={1} as={Link} to={`${product.id}`} display={'block'} w={'full'}>

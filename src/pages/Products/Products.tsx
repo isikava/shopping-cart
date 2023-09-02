@@ -5,34 +5,25 @@ import {
   BreadcrumbLink,
   Button,
   Container,
-  Divider,
   Flex,
   Grid,
-  Heading,
   Modal,
   ModalContent,
   ModalOverlay,
   Select,
   SimpleGrid,
-  Text,
   VStack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { PRODUCTS, PRODUCTS_WOMEN } from '@/data';
-import { ProductCard } from './elements/ProductCard';
-import { api } from '@/api';
-import { useState, useEffect, useMemo } from 'react';
-import { addToCart } from '../Router';
-import { Filter } from './elements/Filter';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useShopState } from '@/context/ShopContext';
+import { Filter } from './elements/Filter';
+import { ProductCard } from './elements/ProductCard';
 
-type ProductsProps = {
-  onAddToCart: addToCart;
-};
-
-export const Products = ({ onAddToCart }: ProductsProps) => {
-  const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
+export const Products = () => {
+  const { products, addToCart } = useShopState();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -56,23 +47,6 @@ export const Products = ({ onAddToCart }: ProductsProps) => {
       setSelectedCategories([...selectedCategories, category]);
     }
   };
-
-  useEffect(() => {
-    let ignore = false;
-
-    const getProducts = async () => {
-      const data = await api.getProducts();
-      if (!ignore) {
-        setProducts(data);
-      }
-    };
-
-    // getProducts();
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
 
   return (
     <Container maxW={'1980px'}>
@@ -180,7 +154,7 @@ export const Products = ({ onAddToCart }: ProductsProps) => {
             spacing={{ base: 4, md: 5, lg: 6 }}
           >
             {filteredProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onAddToCart={onAddToCart} />
+              <ProductCard key={p.id} product={p} onAddToCart={addToCart} />
             ))}
           </SimpleGrid>
         </VStack>

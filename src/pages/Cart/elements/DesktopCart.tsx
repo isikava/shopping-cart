@@ -1,13 +1,10 @@
 import { Box, HStack, Divider, VStack, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DesktopCartItem } from './DesktopCartItem';
-import { CartProps } from '..';
+import { useShopState } from '@/context/ShopContext';
 
-export const DesktopCart = ({
-  cart,
-  onDeleteFromCart,
-  onUpdateQuantity,
-}: CartProps) => {
+export const DesktopCart = () => {
+  const { cart } = useShopState();
   return (
     <Box>
       <HStack
@@ -39,12 +36,7 @@ export const DesktopCart = ({
 
       <VStack spacing={4} align={'stretch'}>
         {cart.map((cp) => (
-          <DesktopCartItem
-            key={cp.productId}
-            {...cp}
-            onDeleteFromCart={onDeleteFromCart}
-            onUpdateQuantity={onUpdateQuantity}
-          />
+          <DesktopCartItem key={cp.productId} {...cp} />
         ))}
       </VStack>
 

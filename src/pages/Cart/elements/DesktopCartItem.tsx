@@ -9,19 +9,15 @@ import {
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Counter } from '@/components/Counter';
-import { CartItemProps } from './MobileCartItem';
-import { PRODUCTS } from '@/data';
+import { useShopState } from '@/context/ShopContext';
 
-export const DesktopCartItem = ({
-  productId,
-  qty,
-  onDeleteFromCart,
-  onUpdateQuantity,
-}: CartItemProps) => {
-  const item = PRODUCTS.find((p) => p.id === productId);
+export const DesktopCartItem = ({ productId, qty }: ICartItem) => {
+  const { products, deleteFromCart, updateQuantity } = useShopState();
+
+  const item = products.find((p) => p.id === productId);
 
   const handleChangeQuantity = (_: string, newQty: number) => {
-    onUpdateQuantity(productId, newQty);
+    updateQuantity(productId, newQty);
   };
 
   if (!item) return null;
@@ -59,7 +55,7 @@ export const DesktopCartItem = ({
           size={['xs', 'sm']}
           aria-label="remove from cart"
           icon={<CloseIcon boxSize={[2, 3]} />}
-          onClick={() => onDeleteFromCart(productId)}
+          onClick={() => deleteFromCart(productId)}
         ></IconButton>
       </Box>
     </HStack>

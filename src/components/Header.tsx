@@ -12,22 +12,14 @@ import {
 } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { Logo, Bag } from '@/data/icons';
-import { LINKS, PRODUCTS } from '@/data';
+import { LINKS } from '@/data';
 import { colors } from '@/theme/colors';
-import { calcQuantity, calcTotal } from '@/pages/Cart/utils';
+import { useShopState } from '@/context/ShopContext';
 const { brand } = colors;
 
-type HeaderProps = {
-  cart: ICartItem[];
-};
-
-export const Header = ({ cart }: HeaderProps) => {
+export const Header = () => {
+  const { subtotal, cartQty } = useShopState();
   const { isOpen, onToggle } = useDisclosure();
-
-  const products = PRODUCTS;
-
-  const cartQty = calcQuantity(cart);
-  const total = calcTotal(cart, products);
 
   return (
     <Box
@@ -136,7 +128,7 @@ export const Header = ({ cart }: HeaderProps) => {
             </Center>
 
             <Text display={{ base: 'none', md: 'block' }} fontWeight={500}>
-              {total}&nbsp;EUR
+              {subtotal.toFixed(2)}&nbsp;EUR
             </Text>
           </Flex>
         </Stack>
