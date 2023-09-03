@@ -1,50 +1,34 @@
-import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
+import { ReactNode, createContext, useContext, useMemo } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { PRODUCTS } from '@/data';
-import { api } from '@/api';
+import { useProducts } from '@/hooks/useProducts';
 
-export type deleteFromCart = (id: number) => void;
-export type addToCart = (id: number) => void;
-export type updateQuantity = (id: number, newQty: number) => void;
+export type AddToCart = (id: number) => void;
+export type DeleteFromCart = (id: number) => void;
+export type UpdateQuantity = (cartItem: ICartItem) => void;
 
 type Context = {
   products: IProduct[];
+  isLoading: boolean;
+  error?: string;
   cart: ICartItem[];
   subtotal: number;
   cartQty: number;
-  addToCart: addToCart;
-  deleteFromCart: deleteFromCart;
-  updateQuantity: updateQuantity;
+  addToCart: AddToCart;
+  deleteFromCart: DeleteFromCart;
+  updateQuantity: UpdateQuantity;
 };
 
 const ShopContext = createContext<Context>({} as Context);
 
 export const ShopProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = useState<IProduct[]>(PRODUCTS);
   const [cart, setCart] = useLocalStorage<ICartItem[]>('shopping-cart', []);
+  const { products, isLoading, error } = useProducts();
 
   const cartQty = cart.reduce((qty, item) => qty + item.qty, 0);
   const subtotal = cart.reduce((sum, cp) => {
     const item = products.find((p) => p.id === cp.productId);
     return sum + (item?.price || 0) * cp.qty;
   }, 0);
-
-  // useEffect(() => {
-  //   let ignore = false;
-
-  //   const getProducts = async () => {
-  //     const data = await api.getProducts();
-  //     if (!ignore) {
-  //       setProducts(data);
-  //     }
-  //   };
-
-  //   // getProducts();
-
-  //   return () => {
-  //     ignore = true;
-  //   };
-  // }, []);
 
   const value = useMemo(() => {
     const addToCart = (productId: number) => {
@@ -64,16 +48,18 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
       setCart(cart.filter((cp) => cp.productId !== id));
     };
 
-    const updateQuantity = (id: number, newQty: number) => {
+    const updateQuantity = (cartItem: ICartItem) => {
       setCart(
         cart.map((cp) => {
-          return cp.productId === id ? { ...cp, qty: newQty } : cp;
+          return cp.productId === cartItem.productId ? cartItem : cp;
         })
       );
     };
 
     return {
       products,
+      isLoading,
+      error,
       cart,
       cartQty,
       subtotal,
@@ -81,7 +67,7 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
       deleteFromCart,
       updateQuantity,
     };
-  }, [products, cart]);
+  }, [products, isLoading, error, cart]);
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };

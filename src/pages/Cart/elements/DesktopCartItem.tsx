@@ -16,8 +16,9 @@ export const DesktopCartItem = ({ productId, qty }: ICartItem) => {
 
   const item = products.find((p) => p.id === productId);
 
-  const handleChangeQuantity = (_: string, newQty: number) => {
-    updateQuantity(productId, newQty);
+  const handleChangeQuantity = (_: string, qty: number) => {
+    const newCartItem = { productId, qty };
+    updateQuantity(newCartItem);
   };
 
   if (!item) return null;

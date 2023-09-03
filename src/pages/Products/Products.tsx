@@ -4,14 +4,17 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Button,
+  Center,
   Container,
   Flex,
   Grid,
+  Heading,
   Modal,
   ModalContent,
   ModalOverlay,
   Select,
   SimpleGrid,
+  Spinner,
   VStack,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -23,7 +26,7 @@ import { Filter } from './elements/Filter';
 import { ProductCard } from './elements/ProductCard';
 
 export const Products = () => {
-  const { products, addToCart } = useShopState();
+  const { products, isLoading, error, addToCart } = useShopState();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -49,7 +52,7 @@ export const Products = () => {
   };
 
   return (
-    <Container maxW={'1980px'}>
+    <Container maxW={'1980px'} pb={10}>
       <VStack align={'flex-start'} mb={[0, 4]}>
         <Breadcrumb fontSize="sm" color={'gray1'} py={2}>
           <BreadcrumbItem>
@@ -81,13 +84,10 @@ export const Products = () => {
         </Box>
 
         {/* Products View */}
-        <VStack
-          alignItems={{ base: 'stretch', xl: 'flex-end' }}
-          spacing={{ base: 4, md: 6 }}
-        >
+        <VStack alignItems={'stretch'} spacing={{ base: 4, md: 6 }}>
           <Flex
             direction={{ base: 'column', md: 'row' }}
-            justify={'space-between'}
+            justify={{ base: 'space-between', xl: 'flex-end' }}
           >
             {/* Mobile Filter */}
             <Box display={{ base: 'block', xl: 'none' }}>
@@ -149,6 +149,16 @@ export const Products = () => {
           </Flex>
 
           {/* Products List */}
+          {isLoading && (
+            <Center>
+              <Spinner />
+            </Center>
+          )}
+          {error && (
+            <Center>
+              <Heading>{error}</Heading>
+            </Center>
+          )}
           <SimpleGrid
             columns={{ base: 2, sm: 3, md: 4 }}
             spacing={{ base: 4, md: 5, lg: 6 }}

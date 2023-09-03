@@ -6,8 +6,8 @@ const instance = axios.create({
 
 const getProducts = async (): Promise<IProduct[]> => {
   try {
-    const { data } = await instance.get('/products?limit=5');
-    // console.log(data);
+    console.log('fetching');
+    const { data } = await instance.get('/products?limit=12');
     return data;
   } catch (err) {
     if (axios.isAxiosError(err)) {
