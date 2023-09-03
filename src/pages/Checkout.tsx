@@ -18,7 +18,6 @@ import {
   Stack,
   Divider,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 import PennyBoard from '@/assets/penny-board.jpg';
 
 const Checkout = () => {
