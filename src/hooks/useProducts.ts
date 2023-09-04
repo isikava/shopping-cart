@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { api } from '@/api';
+import { getProducts } from '@/pages/Products/api';
 // import { PRODUCTS } from '@/data';
 
 export const useProducts = () => {
@@ -10,12 +10,12 @@ export const useProducts = () => {
   useEffect(() => {
     let ignore = false;
 
-    const getProducts = async () => {
+    const getData = async () => {
       setIsLoading(true);
       setError('');
 
       try {
-        const data = await api.getProducts();
+        const data = await getProducts();
         if (!ignore) {
           setProducts(data);
         }
@@ -26,7 +26,7 @@ export const useProducts = () => {
       }
     };
 
-    getProducts();
+    getData();
 
     return () => {
       ignore = true;
