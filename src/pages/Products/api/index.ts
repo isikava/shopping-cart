@@ -1,3 +1,4 @@
+import { useFetch } from '@/hooks/useFetch';
 import { axios } from '@/lib/axios';
 
 export const getProduct = (id: string): Promise<IProduct> => {
@@ -6,4 +7,8 @@ export const getProduct = (id: string): Promise<IProduct> => {
 
 export const getProducts = (): Promise<IProduct[]> => {
   return axios.get('/products?limit=12');
+};
+
+export const useProducts = () => {
+  return useFetch<IProduct[]>(getProducts);
 };

@@ -24,18 +24,23 @@ import { Link } from 'react-router-dom';
 import { useShopState } from '@/context/ShopContext';
 import { Filter } from './elements/Filter';
 import { ProductCard } from './elements/ProductCard';
+import { useProducts } from './api';
 
 export const Products = () => {
-  const { products, isLoading, error, addToCart } = useShopState();
+  const { addToCart } = useShopState();
+  const { data: products, isLoading, error } = useProducts();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const categories = useMemo(
-    () => [...new Set(products.map((p) => p.category))],
-    [products]
-  );
+  const categories = useMemo(() => {
+    if (!products) return [];
+
+    return [...new Set(products.map((p) => p.category))];
+  }, [products]);
 
   const filteredProducts = useMemo(() => {
+    if (!products) return [];
+
     let result = [...products];
     if (selectedCategories.length > 0) {
       result = result.filter((p) => selectedCategories.includes(p.category));
@@ -156,7 +161,7 @@ export const Products = () => {
           )}
           {error && (
             <Center>
-              <Heading>{error}</Heading>
+              <Heading>{error.message}</Heading>
             </Center>
           )}
           <SimpleGrid
