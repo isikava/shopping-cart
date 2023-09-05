@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { HiShoppingBag } from 'react-icons/hi';
-import { AddToCart } from '@/context/CartContext';
+import { AddToCart } from '@/context/CartProvider';
 
 type ProductCardProps = {
   product: IProduct;

@@ -1,6 +1,6 @@
 import { VStack, StackDivider } from '@chakra-ui/react';
 import { MobileCartItem } from './MobileCartItem';
-import { useCartState } from '@/context/CartContext';
+import { useCartState } from '@/context/CartProvider';
 
 export const MobileCart = () => {
   const { cart } = useCartState();

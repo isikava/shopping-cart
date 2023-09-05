@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/Button';
 import { MobileCart } from './elements/MobileCart';
 import { DesktopCart } from './elements/DesktopCart';
-import { useCartState } from '@/context/CartContext';
+import { useCartState } from '@/context/CartProvider';
 
 export const Cart = () => {
   const { cart, subtotal } = useCartState();

@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Counter } from '@/components/Counter';
-import { useCartState } from '@/context/CartContext';
+import { useCartState } from '@/context/CartProvider';
 
 export const DesktopCartItem = ({ productId, qty }: ICartItem) => {
   const { products, deleteFromCart, updateQuantity } = useCartState();

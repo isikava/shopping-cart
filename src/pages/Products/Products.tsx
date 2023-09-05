@@ -21,16 +21,16 @@ import {
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useCartState } from '@/context/CartContext';
+import { useCartState } from '@/context/CartProvider';
 import { Filter } from './elements/Filter';
 import { ProductCard } from './elements/ProductCard';
 import { useProducts } from './api';
 
 export const Products = () => {
-  const { addToCart } = useCartState();
-  const { data: products, isLoading, error } = useProducts();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const { data: products, isLoading, error } = useProducts();
+  const { addToCart } = useCartState();
 
   const categories = useMemo(() => {
     if (!products) return [];

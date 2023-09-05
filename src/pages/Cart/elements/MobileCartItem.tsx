@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Counter } from '@/components/Counter';
 import { CloseIcon } from '@chakra-ui/icons';
-import { useCartState } from '@/context/CartContext';
+import { useCartState } from '@/context/CartProvider';
 
 export const MobileCartItem = ({ productId, qty }: ICartItem) => {
   const { products, deleteFromCart, updateQuantity } = useCartState();

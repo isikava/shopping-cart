@@ -1,30 +1,54 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useState } from 'react';
+import { useCache } from '@/context/CacheProvider';
 
 type FetchFunction<T> = () => Promise<T>;
 
-export function useFetch<T>(fetchFunction: FetchFunction<T>) {
-  const [data, setData] = useState<T | null>(null);
+type FetchResult<T> = {
+  data: T | null;
+  isLoading: boolean;
+  error: Error | null;
+};
+
+export function useFetch<T>(
+  key: string,
+  fetchFunction: FetchFunction<T>
+): FetchResult<T> {
+  const { cache, cacheData } = useCache();
+  const [data, setData] = useState<T | null>(cache[key] || null);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-    console.log('fetching');
-
-    try {
-      const result = await fetchFunction();
-      setData(result);
-    } catch (err: any) {
-      setError(err as Error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [fetchFunction]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    let isMounted = true;
 
-  return { data, error, isLoading, refetch: fetchData };
+    const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        if (!cache[key]) {
+          console.log('fetchData');
+          const result = await fetchFunction();
+          cacheData(key, result);
+          if (isMounted) {
+            setData(result);
+          }
+        }
+      } catch (error) {
+        if (isMounted) {
+          setError(error as Error);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [key, cache, cacheData, fetchFunction]);
+
+  return { data, isLoading, error };
 }

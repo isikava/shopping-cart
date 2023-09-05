@@ -1,7 +1,7 @@
 import { Box, HStack, Divider, VStack, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DesktopCartItem } from './DesktopCartItem';
-import { useCartState } from '@/context/CartContext';
+import { useCartState } from '@/context/CartProvider';
 
 export const DesktopCart = () => {
   const { cart } = useCartState();

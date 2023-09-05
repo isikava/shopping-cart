@@ -14,7 +14,7 @@ import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { Logo, Bag } from '@/data/icons';
 import { LINKS } from '@/data';
 import { colors } from '@/theme/colors';
-import { useCartState } from '@/context/CartContext';
+import { useCartState } from '@/context/CartProvider';
 const { brand } = colors;
 
 export const Header = () => {

@@ -10,5 +10,5 @@ export const getProducts = (): Promise<IProduct[]> => {
 };
 
 export const useProducts = () => {
-  return useFetch<IProduct[]>(getProducts);
+  return useFetch<IProduct[]>('products', getProducts);
 };
