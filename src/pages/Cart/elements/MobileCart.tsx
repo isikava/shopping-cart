@@ -1,9 +1,9 @@
 import { VStack, StackDivider } from '@chakra-ui/react';
 import { MobileCartItem } from './MobileCartItem';
-import { useShopState } from '@/context/ShopContext';
+import { useCartState } from '@/context/CartContext';
 
 export const MobileCart = () => {
-  const { cart } = useShopState();
+  const { cart } = useCartState();
 
   return (
     <VStack spacing={4} divider={<StackDivider />}>

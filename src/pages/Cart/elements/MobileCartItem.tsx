@@ -11,12 +11,12 @@ import {
 } from '@chakra-ui/react';
 import { Counter } from '@/components/Counter';
 import { CloseIcon } from '@chakra-ui/icons';
-import { useShopState } from '@/context/ShopContext';
+import { useCartState } from '@/context/CartContext';
 
 export const MobileCartItem = ({ productId, qty }: ICartItem) => {
-  const { products, deleteFromCart, updateQuantity } = useShopState();
+  const { products, deleteFromCart, updateQuantity } = useCartState();
 
-  const item = products.find((p) => p.id === productId);
+  const item = products?.find((p) => p.id === productId);
 
   const handleChangeQuantity = (_: string, qty: number) => {
     const newCartItem = { productId, qty };

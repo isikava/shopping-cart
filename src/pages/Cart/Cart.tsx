@@ -20,10 +20,10 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/Button';
 import { MobileCart } from './elements/MobileCart';
 import { DesktopCart } from './elements/DesktopCart';
-import { useShopState } from '@/context/ShopContext';
+import { useCartState } from '@/context/CartContext';
 
 export const Cart = () => {
-  const { cart, subtotal } = useShopState();
+  const { cart, subtotal } = useCartState();
 
   return (
     <Container maxW={'1440px'}>

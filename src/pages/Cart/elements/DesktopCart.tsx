@@ -1,10 +1,10 @@
 import { Box, HStack, Divider, VStack, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { DesktopCartItem } from './DesktopCartItem';
-import { useShopState } from '@/context/ShopContext';
+import { useCartState } from '@/context/CartContext';
 
 export const DesktopCart = () => {
-  const { cart } = useShopState();
+  const { cart } = useCartState();
   return (
     <Box>
       <HStack

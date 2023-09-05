@@ -9,12 +9,12 @@ import {
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Counter } from '@/components/Counter';
-import { useShopState } from '@/context/ShopContext';
+import { useCartState } from '@/context/CartContext';
 
 export const DesktopCartItem = ({ productId, qty }: ICartItem) => {
-  const { products, deleteFromCart, updateQuantity } = useShopState();
+  const { products, deleteFromCart, updateQuantity } = useCartState();
 
-  const item = products.find((p) => p.id === productId);
+  const item = products?.find((p) => p.id === productId);
 
   const handleChangeQuantity = (_: string, qty: number) => {
     const newCartItem = { productId, qty };

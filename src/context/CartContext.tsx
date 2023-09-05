@@ -1,15 +1,13 @@
 import { ReactNode, createContext, useContext, useMemo } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { useProducts } from '@/hooks/useProducts';
+import { useProducts } from '@/pages/Products/api';
 
 export type AddToCart = (id: number) => void;
 export type DeleteFromCart = (id: number) => void;
 export type UpdateQuantity = (cartItem: ICartItem) => void;
 
 type Context = {
-  products: IProduct[];
-  isLoading: boolean;
-  error?: string;
+  products: IProduct[] | null;
   cart: ICartItem[];
   subtotal: number;
   cartQty: number;
@@ -18,15 +16,15 @@ type Context = {
   updateQuantity: UpdateQuantity;
 };
 
-const ShopContext = createContext<Context>({} as Context);
+const CartContext = createContext<Context>({} as Context);
 
-export const ShopProvider = ({ children }: { children: ReactNode }) => {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useLocalStorage<ICartItem[]>('shopping-cart', []);
-  const { products, isLoading, error } = useProducts();
+  const { data: products } = useProducts();
 
   const cartQty = cart.reduce((qty, item) => qty + item.qty, 0);
   const subtotal = cart.reduce((sum, cp) => {
-    const item = products.find((p) => p.id === cp.productId);
+    const item = products?.find((p) => p.id === cp.productId);
     return sum + (item?.price || 0) * cp.qty;
   }, 0);
 
@@ -58,8 +56,6 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
 
     return {
       products,
-      isLoading,
-      error,
       cart,
       cartQty,
       subtotal,
@@ -67,9 +63,9 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
       deleteFromCart,
       updateQuantity,
     };
-  }, [products, isLoading, error, cart]);
+  }, [products, cart]);
 
-  return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
-export const useShopState = () => useContext(ShopContext);
+export const useCartState = () => useContext(CartContext);

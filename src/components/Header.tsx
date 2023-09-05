@@ -14,11 +14,11 @@ import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { Logo, Bag } from '@/data/icons';
 import { LINKS } from '@/data';
 import { colors } from '@/theme/colors';
-import { useShopState } from '@/context/ShopContext';
+import { useCartState } from '@/context/CartContext';
 const { brand } = colors;
 
 export const Header = () => {
-  const { subtotal, cartQty } = useShopState();
+  const { subtotal, cartQty } = useCartState();
   const { isOpen, onToggle } = useDisclosure();
 
   return (
