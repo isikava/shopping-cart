@@ -12,10 +12,8 @@ import {
   Stack,
   Grid,
 } from '@chakra-ui/react';
-import heroBgMobi from '@/assets/hero-bg-320.jpg';
-import heroBg from '@/assets/hero-bg-1900.jpg';
-import home3mobi from '@/assets/home3-300.jpg';
-import home3 from '@/assets/home3-900.jpg';
+import heroBg320 from '@/assets/hero-bg-320.webp';
+import heroBg1900 from '@/assets/hero-bg-1900.webp';
 import { Button } from '@/components/Button';
 import { Paginate } from '@/components/Paginate';
 import {
@@ -36,7 +34,7 @@ const Home = () => {
   return (
     <>
       <Box
-        bgImage={{ base: heroBgMobi, md: heroBg }}
+        bgImage={{ base: heroBg320, md: heroBg1900 }}
         bgSize={'cover'}
         bgPos={'center'}
         bgRepeat="no-repeat"
@@ -52,7 +50,7 @@ const Home = () => {
           >
             <Flex flex={'1 1 55%'} w={{ base: '80%', md: 'full' }}>
               <Image
-                srcSet="img/hero-250.png 480w, img/hero-850.png 1980w"
+                srcSet="img/hero-250.webp 480w, img/hero-850.webp 1980w"
                 w={'full'}
               />
             </Flex>
@@ -141,7 +139,7 @@ const Home = () => {
           <GridItem>
             <Flex bg={'#F1EFF0'} h={'full'} align={'center'}>
               <Image
-                srcSet="img/home1-140.jpg 480w, img/home1-460.jpg 1980w"
+                srcSet="img/home1-140.webp 480w, img/home1-460.webp 1980w"
                 flex={1}
                 objectFit={'cover'}
                 alignSelf={'stretch'}
@@ -168,9 +166,12 @@ const Home = () => {
           </GridItem>
           <GridItem
             rowSpan={2}
-            bgImage={{ base: home3mobi, md: home3 }}
+            bgImage={{
+              base: 'url(img/home3-300.webp)',
+              sm: 'url(img/home3-900.webp)',
+            }}
             bgSize={'cover'}
-            bgPos={'center'}
+            bgPos={'left center'}
           >
             <Flex h={'full'} align={'flex-end'}>
               <VStack
@@ -199,7 +200,13 @@ const Home = () => {
             </Flex>
           </GridItem>
           <GridItem>
-            <Flex bg={'#F3DCD2'} h={'full'} align={'center'}>
+            <Flex
+              bg={
+                'linear-gradient(90deg, #F7E0D5 0%, #F3DCD2 83.85%, rgba(243, 220, 210, 0.14) 100%)'
+              }
+              h={'full'}
+              align={'center'}
+            >
               <VStack
                 flex={1}
                 align={'flex-start'}
@@ -224,7 +231,7 @@ const Home = () => {
                 </Button>
               </VStack>
               <Image
-                srcSet="img/home2-140.jpg 480w, img/home2-460.jpg 1980w"
+                srcSet="img/home2-140.webp 480w, img/home2-460.webp 1980w"
                 flex={1}
                 flexShrink={0}
                 objectFit={'cover'}
