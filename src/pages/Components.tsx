@@ -22,6 +22,8 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Flex,
+  Image,
 } from '@chakra-ui/react';
 import { Button } from '@/components/Button';
 import { BiHeart } from 'react-icons/bi';
@@ -29,11 +31,12 @@ import { Paginate } from '@/components/Paginate';
 import { Counter } from '@/components/Counter';
 import { MinusIcon, AddIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
+import { Img } from '@/components/Img';
 
 const Components = () => {
   return (
     <Container maxW={'container.xl'} pb={96}>
-      <VStack spacing={6} align={'flex-start'}>
+      <VStack spacing={6} align={'stretch'}>
         <Heading size={'xl'}>Forms</Heading>
         <FormControl>
           <FormLabel>Idle</FormLabel>
@@ -198,6 +201,47 @@ const Components = () => {
             )}
           </AccordionItem>
         </Accordion>
+
+        <Heading>Images</Heading>
+        <VStack>
+          <Heading>Chakra </Heading>
+          <Box w={'full'}>
+            {/* native aspect-raio with width and height not working */}
+            <Image
+              srcSet="img/hero-250.webp 480w, img/hero-850.webp 1980w"
+              width={400}
+              height={400}
+            />
+          </Box>
+        </VStack>
+
+        <VStack>
+          <Heading>Custom Img</Heading>
+          {/* it works */}
+          <Box w={'full'}>
+            <Img
+              srcSet="img/hero-250.webp 480w, img/hero-850.webp 1980w"
+              width={852}
+              height={757}
+            />
+          </Box>
+        </VStack>
+
+        <VStack>
+          <Heading>Native</Heading>
+          <img
+            srcSet="img/hero-250.webp 480w, img/hero-850.webp 1980w"
+            width="852"
+            height="757"
+          />
+        </VStack>
+
+        <VStack>
+          <Heading>Img fill</Heading>
+          <Flex position={'relative'} w={'500px'} h={'500px'}>
+            <Img src="img/hero-850.webp" fill />
+          </Flex>
+        </VStack>
       </VStack>
     </Container>
   );

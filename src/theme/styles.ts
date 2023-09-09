@@ -5,5 +5,8 @@ export const styles: Styles = {
     body: {
       color: 'black',
     },
+    img: {
+      width: '100%',
+    },
   },
 };
