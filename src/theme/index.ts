@@ -6,8 +6,8 @@ import { components } from './components';
 
 const theme = extendTheme({
   fonts: {
-    heading: `Oswald, Montserrat, ${base.fonts?.heading}`,
-    body: `Roboto, Inter, ${base.fonts?.body}`,
+    heading: `Oswald, ${base.fonts?.heading}`,
+    body: `Roboto, ${base.fonts?.body}`,
   },
   colors,
   components,

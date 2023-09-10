@@ -5,11 +5,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
+import webfontDownload from 'vite-plugin-webfont-dl';
 import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(), webfontDownload()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

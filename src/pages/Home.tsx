@@ -136,7 +136,7 @@ const Home = () => {
         <Grid
           templateColumns={{ base: '1fr', md: '1fr 1fr' }}
           gridTemplateRows={{ base: 'repeat(4, 1fr)', md: '1fr 1fr' }}
-          gap={4}
+          gap={[4, 6, 7]}
         >
           <GridItem>
             <Flex bg={'#F1EFF0'} h={'full'} align={'stretch'}>
