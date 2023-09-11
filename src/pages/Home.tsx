@@ -11,11 +11,10 @@ import {
   Stack,
   Grid,
   Fade,
+  BoxProps,
 } from '@chakra-ui/react';
 import heroBg320 from '@/assets/hero-bg-320.webp';
 import heroBg1900 from '@/assets/hero-bg-1900.webp';
-import { Button } from '@/components/Button';
-import { Paginate } from '@/components/Paginate';
 import {
   BArmani,
   BBurberry,
@@ -27,7 +26,10 @@ import {
 } from '@/data/icons';
 import { colors } from '@/theme/colors';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/Button';
 import { Img } from '@/components/Img';
+import { Paginate } from '@/components/Paginate';
+import { OutlineText } from '@/components/OutlineText';
 
 const { divider } = colors;
 
@@ -45,41 +47,43 @@ const Home = () => {
             direction={{ base: 'column', md: 'row-reverse' }}
             w={'full'}
             align={{ base: 'center' }}
-            spacing={{ base: 2, md: 10 }}
+            spacing={[2, 4, 8, 16]}
             py={{ base: 8 }}
             pb={{ base: 4, md: 0 }}
           >
-            <Flex flex={'1 1 55%'} w={{ base: '80%', md: 'full' }} h={'full'}>
+            <Flex flex={'1 1 60%'} w={{ base: '80%', md: 'full' }} h={'full'}>
               <Img
                 srcSet="img/hero-250.webp 480w, img/hero-850.webp 1980w"
                 width={852}
                 height={757}
               />
             </Flex>
-            <Flex flex={'1 1 45%'}>
-              <VStack
-                maxW={'30rem'}
-                px={4}
-                spacing={{ base: 4, md: 10 }}
-                align={{ base: 'center', md: 'flex-start' }}
-                textAlign={{ base: 'center', md: 'left' }}
-              >
-                <Heading
-                  fontSize={{ base: '3xl', md: '4xl', lg: '7xl' }}
-                  fontWeight={'semibold'}
-                  textTransform={'uppercase'}
+            <Flex flex={'1 1 40%'}>
+              <BorderWrapper pr={{ base: 0, md: 8 }}>
+                <VStack
+                  maxW={'504px'}
+                  spacing={{ base: 4, md: 10 }}
+                  align={{ base: 'center', md: 'flex-start' }}
+                  textAlign={{ base: 'center', md: 'left' }}
                 >
-                  SUMMER SALE GEt 30% OFF On all dress.
-                </Heading>
-                <Button
-                  as={Link}
-                  to="/products"
-                  variant={'transp'}
-                  size={{ base: '-sm', md: '-md' }}
-                >
-                  shop now
-                </Button>
-              </VStack>
+                  <Heading
+                    fontSize={{ base: '3xl', md: '4xl', lg: '7xl', xl: '86px' }}
+                    fontWeight={'semibold'}
+                    textTransform={'uppercase'}
+                  >
+                    SUMMER SALE GEt <OutlineText>30 % OFF</OutlineText> On all
+                    dress.
+                  </Heading>
+                  <Button
+                    as={Link}
+                    to="/products"
+                    variant={'transp'}
+                    size={{ base: '-sm', md: '-md' }}
+                  >
+                    shop now
+                  </Button>
+                </VStack>
+              </BorderWrapper>
             </Flex>
           </Stack>
         </Container>
@@ -88,55 +92,71 @@ const Home = () => {
         </Flex>
       </Box>
       <Container maxW={'1920px'} mb={'500px'} mt={4}>
-        <Heading
-          size={'md'}
-          fontWeight={'normal'}
-          textTransform={'uppercase'}
-          textAlign={'center'}
-        >
-          chose your brand
-        </Heading>
-        <SimpleGrid
-          minChildWidth={{ base: '120px', md: '235px' }}
-          color={'dark2'}
+        <Box
+          pos={'relative'}
           border={{ md: `2px solid ${divider}` }}
-          py={{ md: 6 }}
-          px={{ md: 2 }}
-          mt={{ base: 4 }}
-          spacing={4}
-          mb={3}
+          mt={[4, 6, 10]}
         >
-          <BrandIcon>
-            <BChanel h={{ base: 3, md: 6 }} w={'auto'} />
-          </BrandIcon>
-          <BrandIcon>
-            <BBurberry h={{ base: 3, md: 6 }} w={'auto'} />
-          </BrandIcon>
-          <BrandIcon>
-            <BDior h={{ base: 4, md: 8 }} w={'auto'} />
-          </BrandIcon>
-          <BrandIcon>
-            <BFendi h={{ base: 3.5, md: 7 }} w={'auto'} />
-          </BrandIcon>
-          <BrandIcon>
-            <BVersace h={{ base: 3.5, md: 7 }} w={'auto'} />
-          </BrandIcon>
-          <BrandIcon>
-            <BGucci h={{ base: 3.5, md: 7 }} w={'auto'} />
-          </BrandIcon>
-          <BrandIcon>
-            <BArmani h={{ base: 3, md: 7 }} w={'auto'} />
-          </BrandIcon>
-          <GridItem display={{ md: 'none' }}>
+          <Box
+            pos={'absolute'}
+            top={0}
+            left={'50%'}
+            px={10}
+            mt={-3}
+            ml={'-115px'}
+            display={{ base: 'none', md: 'block' }}
+            bg={'white'}
+          >
+            <Heading
+              size={'md'}
+              fontWeight={'normal'}
+              textTransform={'uppercase'}
+              textAlign={'center'}
+            >
+              chose your brand
+            </Heading>
+          </Box>
+          <SimpleGrid
+            minChildWidth={{ base: '120px', md: '235px' }}
+            color={'dark2'}
+            spacing={4}
+            py={{ md: 6 }}
+            px={{ md: 2 }}
+          >
             <BrandIcon>
-              <BChanel h={{ base: 3 }} w={'auto'} />
+              <BChanel h={{ base: 3, md: 6 }} w={'auto'} />
             </BrandIcon>
-          </GridItem>
-        </SimpleGrid>
+            <BrandIcon>
+              <BBurberry h={{ base: 3, md: 6 }} w={'auto'} />
+            </BrandIcon>
+            <BrandIcon>
+              <BDior h={{ base: 4, md: 8 }} w={'auto'} />
+            </BrandIcon>
+            <BrandIcon>
+              <BFendi h={{ base: 3.5, md: 7 }} w={'auto'} />
+            </BrandIcon>
+            <BrandIcon>
+              <BVersace h={{ base: 3.5, md: 7 }} w={'auto'} />
+            </BrandIcon>
+            <BrandIcon>
+              <BGucci h={{ base: 3.5, md: 7 }} w={'auto'} />
+            </BrandIcon>
+            <BrandIcon>
+              <BArmani h={{ base: 3, md: 7 }} w={'auto'} />
+            </BrandIcon>
+            <GridItem display={{ md: 'none' }}>
+              <BrandIcon>
+                <BChanel h={{ base: 3 }} w={'auto'} />
+              </BrandIcon>
+            </GridItem>
+          </SimpleGrid>
+        </Box>
+
         <Grid
           templateColumns={{ base: '1fr', md: '1fr 1fr' }}
           gridTemplateRows={{ base: 'repeat(4, 1fr)', md: '1fr 1fr' }}
           gap={[4, 6, 7]}
+          mt={[4, 6, 8]}
         >
           <GridItem>
             <Flex bg={'#F1EFF0'} h={'full'} align={'stretch'}>
@@ -261,7 +281,7 @@ const Home = () => {
   );
 };
 
-const BrandIcon = ({ children }: { children: React.ReactNode }) => {
+const BrandIcon = ({ children }: BoxProps) => {
   return (
     <Center
       h={{ base: 14, md: 36 }}
@@ -274,6 +294,30 @@ const BrandIcon = ({ children }: { children: React.ReactNode }) => {
     >
       {children}
     </Center>
+  );
+};
+
+const BorderWrapper = ({ children, ...rest }: BoxProps) => {
+  return (
+    <Box
+      pos={'relative'}
+      pt={{ base: 0, md: 4 }}
+      _after={{
+        content: "''",
+        pos: 'absolute',
+        w: '80%',
+        h: '40%',
+        top: 0,
+        right: 0,
+        borderTop: '2px',
+        borderRight: '2px',
+        opacity: { base: 0, md: 1 },
+        transition: '300ms',
+      }}
+      {...rest}
+    >
+      {children}
+    </Box>
   );
 };
 
