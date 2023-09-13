@@ -91,7 +91,7 @@ const Home = () => {
           <Paginate variant="brand" />
         </Flex>
       </Box>
-      <Container maxW={'1920px'} mb={'500px'} mt={4}>
+      <Container maxW={'1920px'} mt={4} pb={[4, 6, 8]}>
         <Box
           pos={'relative'}
           border={{ md: `2px solid ${divider}` }}
@@ -275,7 +275,6 @@ const Home = () => {
             </Flex>
           </GridItem>
         </Grid>
-        <SimpleGrid columns={{ base: 1 }} gap={3}></SimpleGrid>
       </Container>
     </Fade>
   );
