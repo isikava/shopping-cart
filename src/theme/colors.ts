@@ -16,6 +16,7 @@ export const colors = {
   divider: '#C4C4C4',
   dark2: '#3F3F3F',
   gray1: '#828282',
+  gray2: '#4F4F4F',
   lighthover: '#F0F2F2',
   link: '#0F6DB1',
 };
