@@ -11,8 +11,7 @@ import {
   Center,
 } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
-import { Logo, Bag } from '@/data/icons';
-import { LINKS } from '@/data';
+import { NAV_LINKS, Logo, Bag } from '@/data';
 import { colors } from '@/theme/colors';
 import { useCartState } from '@/context/CartProvider';
 const { brand } = colors;
@@ -76,7 +75,7 @@ export const Header = () => {
           spacing={3}
           px={4}
         >
-          {LINKS.map((l) => (
+          {NAV_LINKS.map((l) => (
             <NavLink key={l.name} {...l} />
           ))}
         </Stack>
@@ -138,7 +137,7 @@ export const Header = () => {
       <Collapse in={isOpen} animateOpacity>
         <Stack display={{ md: 'none' }} py={4}>
           <VStack as={'nav'} spacing={4}>
-            {LINKS.map((l) => (
+            {NAV_LINKS.map((l) => (
               <NavLink key={l.id} {...l} />
             ))}
             <NavLink to={'sign-in'} name="Sign&nbsp;In" />
