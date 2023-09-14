@@ -70,7 +70,7 @@ export const MobileCartItem = ({ productId, qty }: ICartItem) => {
           <Text as="span" color={'#BDBDBD'} fontSize={'sm'}>
             Price:{' '}
           </Text>
-          ${item.price} EUR
+          {item.price} EUR
         </Text>
       </HStack>
     </Box>

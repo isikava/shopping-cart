@@ -124,9 +124,8 @@ export const PRODUCTS_WOMEN = [
 export const NAV_LINKS = [
   { name: 'Home', to: '/', id: 1 },
   { name: 'Shop', to: 'products', id: 2 },
-  { name: 'Blog', to: 'blog', id: 3 },
+  { name: 'Blog', to: 'components', id: 3 },
   { name: 'Checkout', to: 'checkout', id: 4 },
-  { name: 'Comp', to: 'components', id: 5 },
 ];
 
 export const FEATURES = [
@@ -136,7 +135,7 @@ export const FEATURES = [
   { name: 'girls' },
   { name: 'new arrivals' },
   { name: 'shoes' },
-  { name: 'cothes' },
+  { name: 'clothes' },
   { name: 'accessories' },
 ];
 

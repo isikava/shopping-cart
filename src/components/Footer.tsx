@@ -106,7 +106,7 @@ export const Footer = () => {
             >
               Join Us
             </Heading>
-            <VStack spacing={3} mt={4}>
+            <VStack spacing={3} mt={[4, 6]}>
               <FormControl>
                 <FormLabel
                   fontSize={['xs', 'sm']}
@@ -212,8 +212,15 @@ const SocialsList = () => {
     <List display={'flex'} flexDir={'column'} gap={2}>
       {SOCIALS.map((l) => (
         <ListItem key={l.name}>
-          <ListLink display={'flex'} alignItems={'center'} gap={2}>
-            <Icon as={l.icon} color={'white'} boxSize={5} />{' '}
+          <ListLink role="group" display={'flex'} alignItems={'center'} gap={2}>
+            <Icon
+              as={l.icon}
+              color={'white'}
+              boxSize={6}
+              _groupHover={{
+                color: 'gray.400',
+              }}
+            />{' '}
             <Text as="span">{l.name}</Text>
           </ListLink>
         </ListItem>
